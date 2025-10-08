@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 082466bb0d12d8142b7692df4fb1b36b, type: 3}
+  m_Name: Sounds
+  m_EditorClassIdentifier: 
+  sounds:
+  - key: pick_up
+    audioClip: {fileID: 8300000, guid: f2371558d76e00140a90f79ec38a8c86, type: 3}
+  - key: equip
+    audioClip: {fileID: 8300000, guid: af04fb0e053a1aa4395f24ff47315116, type: 3}
+  - key: put_up
+    audioClip: {fileID: 8300000, guid: 1cd83452c259fbf45b9b5626cb9536b6, type: 3}
+  - key: put_down
+    audioClip: {fileID: 8300000, guid: 976112dc9084c1040b53319b58ed462e, type: 3}
+  - key: chop
+    audioClip: {fileID: 8300000, guid: 6f30299d25b8b9e4cad274f0eeb4abda, type: 3}
+  - key: cracking
+    audioClip: {fileID: 8300000, guid: a143c283b7e6b4a43940fcf70ef8b1e3, type: 3}
+  - key: impact_fall
+    audioClip: {fileID: 8300000, guid: 7915d86eacffc3c45a6b4b2eda7232fc, type: 3}
+  - key: apple_eat
+    audioClip: {fileID: 8300000, guid: 7228fee6119b1e645bbbfc09a8b61418, type: 3}

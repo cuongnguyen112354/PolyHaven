@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2222747b07ba15f44afd00f6e4deea04, type: 3}
+  m_Name: CraftingRecipes
+  m_EditorClassIdentifier: 
+  toolRecipes:
+  - ingredients:
+    - item: {fileID: 11400000, guid: 0ec8f2769a2952f468c156c850bc1c0a, type: 2}
+      quantity: 3
+    - item: {fileID: 11400000, guid: 04783c699a0b1cf4fb72ea0d898d406a, type: 2}
+      quantity: 5
+    result: {fileID: 11400000, guid: 48135558fe92a9a40a35c53a3525360b, type: 2}
+    resultAmount: 1
+  - ingredients:
+    - item: {fileID: 11400000, guid: 0ec8f2769a2952f468c156c850bc1c0a, type: 2}
+      quantity: 10
+    - item: {fileID: 11400000, guid: 04783c699a0b1cf4fb72ea0d898d406a, type: 2}
+      quantity: 7
+    result: {fileID: 11400000, guid: c0f67a3806c93504e95c2efee3cfb1f5, type: 2}
+    resultAmount: 1
+  - ingredients:
+    - item: {fileID: 11400000, guid: 0ec8f2769a2952f468c156c850bc1c0a, type: 2}
+      quantity: 10
+    - item: {fileID: 11400000, guid: 04783c699a0b1cf4fb72ea0d898d406a, type: 2}
+      quantity: 7
+    result: {fileID: 11400000, guid: f1c01faa14291034898478d5523be5d4, type: 2}
+    resultAmount: 1
+  propRecipes:
+  - ingredients:
+    - item: {fileID: 11400000, guid: 0ec8f2769a2952f468c156c850bc1c0a, type: 2}
+      quantity: 5
+    - item: {fileID: 11400000, guid: 04783c699a0b1cf4fb72ea0d898d406a, type: 2}
+      quantity: 10
+    result: {fileID: 11400000, guid: d97ed8ff0d823374a91cbce0b294021e, type: 2}
+    resultAmount: 1
+  houseRecipes: []

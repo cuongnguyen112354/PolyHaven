@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8adaced59a467d344b14f59517b1630d, type: 3}
+  m_Name: MyCursor
+  m_EditorClassIdentifier: 
+  cursors:
+  - key: default
+    icon: {fileID: 2800000, guid: 93f09c50a13109d4fbb262f0fb92916b, type: 3}
+  - key: none_drag
+    icon: {fileID: 2800000, guid: 2784d3c515ba9c94b94546de50c07395, type: 3}
+  - key: drag
+    icon: {fileID: 2800000, guid: 7de06b8e8afdc134383d7e0619b73cee, type: 3}
