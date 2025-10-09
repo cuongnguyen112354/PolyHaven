@@ -12,7 +12,26 @@ public class InteractObject : MonoBehaviour
     private int layerMask;
     private TMP_Text interactionInfo_Text;
 
-    const float MAX_INTERACTION_DISTANCE = 1.75f;
+    const float MAX_INTERACTION_DISTANCE = 1.8f;
+
+    private InputSystem_Actions inputActions;
+
+    void Awake()
+    {
+        inputActions = new InputSystem_Actions();
+    }
+
+    void OnEnable()
+    {
+        inputActions.Enable();
+
+        inputActions.Player.Interact.performed += _ => { Interact(); };
+    }
+
+    void OnDisable()
+    {
+        inputActions.Disable();
+    }
 
     void Start()
     {
@@ -22,7 +41,7 @@ public class InteractObject : MonoBehaviour
     void Update()
     {
         if (!GameManager.Instance.CompareGameState("Playing") ||
-            !Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, MAX_INTERACTION_DISTANCE, layerMask) ||
+            !Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, MAX_INTERACTION_DISTANCE, layerMask, QueryTriggerInteraction.Ignore) ||
             hit.collider.gameObject.GetComponent<IInteractable>() == null)
         {
             interactionInfo_Text.gameObject.SetActive(false);
@@ -38,14 +57,14 @@ public class InteractObject : MonoBehaviour
         (targetIcon.sprite, interactionInfo_Text.text) = focusingObject.GetComponent<IInteractable>().HowInteract();
         targetIcon.SetNativeSize();
         interactionInfo_Text.gameObject.SetActive(true);
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (focusingObject.TryGetComponent<PickableObject>(out var pickableObject))
-                pickableObject.Interact();
-        }
     }
-    
+
+    private void Interact()
+    {
+        if (focusingObject.TryGetComponent<IInteractable>(out var obj))
+            obj.Interact();
+    }
+
     public void SetInteractionText(TMP_Text _TMP_Text)
     {
         interactionInfo_Text = _TMP_Text;

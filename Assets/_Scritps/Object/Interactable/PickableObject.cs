@@ -20,7 +20,7 @@ public class PickableObject : MonoBehaviour, IInteractable
     public void Interact()
     {
         // Logic for picking up the item
-        if (InventoryManager.Instance.AddItem(itemData))
+        if (InventoryManager.Instance.IsAddItem(itemData))
         {
             GameObject floatingTextPrefab = Resources.Load<GameObject>("_Prefabs/FloatingText");
             Vector3 spawnPosition = new(transform.position.x, transform.position.y + .5f, transform.position.z);

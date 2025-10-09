@@ -28,11 +28,17 @@ public class DataPersistence : MonoBehaviour
         return InventoryManager.Instance.GetInventoryData();
     }
 
+    // Construction Data
+    private List<ObjectData> GetConstructionData()
+    {
+        return ConstructionManager.Instance.GetConstructionData();
+    }
+
     // Save and Load All Game Data
     public void SaveGameData()
     {
-        GameData gameData = new(GetPlayerData(), GetInventoryData());
-        
+        GameData gameData = new(GetPlayerData(), GetInventoryData(), GetConstructionData());
+
         string json = JsonUtility.ToJson(gameData, true);
         File.WriteAllText(Path, json);
     }
@@ -44,8 +50,12 @@ public class DataPersistence : MonoBehaviour
             string json = File.ReadAllText(Path);
             GameData gameData = JsonUtility.FromJson<GameData>(json);
 
-            PlayerHealth.Instance.Init(gameData.playerData);
-            InventoryManager.Instance.Init(gameData.inventoryData);
+            if (gameData.playerData != null)
+                PlayerHealth.Instance.Init(gameData.playerData);
+            if (gameData.inventoryData != null)
+                InventoryManager.Instance.Init(gameData.inventoryData);
+            if (gameData.constructionData != null)
+                ConstructionManager.Instance.Init(gameData.constructionData);
         }
         else
         {
@@ -60,10 +70,12 @@ public class GameData
 {
     public PlayerData playerData;
     public List<SlotData> inventoryData;
+    public List<ObjectData> constructionData;
 
-    public GameData(PlayerData playerData, List<SlotData> inventoryData)
+    public GameData(PlayerData playerData, List<SlotData> inventoryData, List<ObjectData> constructionData)
     {
         this.playerData = playerData;
         this.inventoryData = inventoryData;
+        this.constructionData = constructionData;
     }
 }

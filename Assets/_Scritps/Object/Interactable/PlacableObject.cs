@@ -104,20 +104,22 @@ public class PlacableObject : MonoBehaviour
 
     void PlaceBlock()
     {
-        meshRenderer.enabled = true;
-        meshRenderer.material = sourceMat;
-        GetComponent<MeshCollider>().isTrigger = false;
-        GetComponent<MeshCollider>().convex = false;
-        gameObject.layer = LayerMask.NameToLayer("Default");
+        // meshRenderer.enabled = true;
+        // meshRenderer.material = sourceMat;
+        // GetComponent<MeshCollider>().isTrigger = false;
+        // GetComponent<MeshCollider>().convex = false;
+        // gameObject.layer = LayerMask.NameToLayer("Default");
 
-        foreach (GameObject go in gameObjects)
-            go.SetActive(true);
+        // foreach (GameObject go in gameObjects)
+        //     go.SetActive(true);
 
-        foreach (MonoBehaviour script in scripts)
-            script.enabled = true;
+        // foreach (MonoBehaviour script in scripts)
+        //     script.enabled = true;
 
-        Destroy(GetComponent<Rigidbody>());
-        Destroy(this);
+        InventoryManager.Instance.RemoveItem(gameObject.name);
+        ConstructionManager.Instance.AddPlacedObject(gameObject.name, transform.position, transform.rotation);
+
+        Destroy(gameObject);
     }
 
     private void SetValid()

@@ -20,7 +20,9 @@ public class InventoryManager : MonoBehaviour
     private readonly Dictionary<string, List<int>> DicName = new();
     private readonly Dictionary<int, Slot> DicSlot = new();
 
-    private int slotSelected = 1;
+    private (int, int) hotbarSlot = (21, 26);
+
+    private int slotSelected;
     private int MAX_SLOT_NUM;
 
     private void Awake()
@@ -195,7 +197,7 @@ public class InventoryManager : MonoBehaviour
         DicName[itemName].Remove(slotIndex);
     }
 
-    public bool AddItem(ItemSO itemData, int quantity = 1)
+    public bool IsAddItem(ItemSO itemData, int quantity = 1)
     {
         if (DicName.TryGetValue(itemData.itemName, out List<int> indices))
         {
@@ -251,6 +253,12 @@ public class InventoryManager : MonoBehaviour
         }
 
         return (false, 0);
+    }
+
+    public void RemoveItem(string itemName, int quantity = 1)
+    {
+        if (DicName.TryGetValue(itemName, out List<int> slotIndexs))
+            RemoveItemFromSlots(slotIndexs, quantity);
     }
 
     public void RemoveItems(List<Ingredient> ingredients)
@@ -312,10 +320,10 @@ public class InventoryManager : MonoBehaviour
     {
         if (slotIndex == slotSelected) return;
 
-        if (slotIndex < 0)
-            slotIndex = 5;
-        else if (slotIndex >= 6)
-            slotIndex = 0;
+        if (slotIndex < hotbarSlot.Item1)
+            slotIndex = hotbarSlot.Item2;
+        else if (slotIndex > hotbarSlot.Item2)
+            slotIndex = hotbarSlot.Item1;
 
         inventorySlots[slotSelected].GetComponent<Image>().color = noneSelectedColor;
         inventorySlots[slotIndex].GetComponent<Image>().color = selectedColor;
@@ -382,7 +390,9 @@ public class InventoryManager : MonoBehaviour
 
             AddItemToSlot(slotData.slotIndex, item, slotData.quantity);
         }
-        SelectingSlot(0);
+
+        slotSelected = hotbarSlot.Item1 + 1;
+        SelectingSlot(hotbarSlot.Item1);
     }
 
     public List<SlotData> GetInventoryData()
