@@ -43,5 +43,5 @@ public class Settings : MonoBehaviour
 
         QualitySettings.vSyncCount = 1;
         qualityToggle.onValueChanged.AddListener(isOn => { QualitySettings.vSyncCount = isOn ? 1 : 0; });
-    }    
+    }
 }

@@ -12,11 +12,11 @@ public class IngredientUI : MonoBehaviour
     [SerializeField] private Color enoughColor;
     [SerializeField] private Color noneEnoughColor;
 
-    private Ingredient ingredient = null;
+    // private Ingredient ingredient = null;
 
     public bool Init(Ingredient ingredient)
     {
-        this.ingredient = ingredient;
+        // this.ingredient = ingredient;
 
         iconItem.sprite = ingredient.item.icon;
 
@@ -39,22 +39,22 @@ public class IngredientUI : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        iconItem.sprite = ingredient.item.icon;
+    // private void OnEnable()
+    // {
+    //     iconItem.sprite = ingredient.item.icon;
 
-        (bool result, int missingQuantity) = InventoryManager.Instance.HasItem(ingredient);
-        if (result)
-        {
-            canvasGroup.alpha = 1;
-            quanlity.color = enoughColor;
-            quanlity.text = ingredient.quantity.ToString();
-        }
-        else
-        {
-            canvasGroup.alpha = .6f;
-            quanlity.color = noneEnoughColor;
-            quanlity.text = $"{missingQuantity}/{ingredient.quantity}";
-        }
-    }
+    //     (bool result, int missingQuantity) = InventoryManager.Instance.HasItem(ingredient);
+    //     if (result)
+    //     {
+    //         canvasGroup.alpha = 1;
+    //         quanlity.color = enoughColor;
+    //         quanlity.text = ingredient.quantity.ToString();
+    //     }
+    //     else
+    //     {
+    //         canvasGroup.alpha = .6f;
+    //         quanlity.color = noneEnoughColor;
+    //         quanlity.text = $"{missingQuantity}/{ingredient.quantity}";
+    //     }
+    // }
 }

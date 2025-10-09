@@ -30,7 +30,7 @@ public class IconCapture : MonoBehaviour
         RenderTexture.active = null;
         DestroyImmediate(rt);
 
-        string folderPath = Application.dataPath + "/Resources/_Icons";
+        string folderPath = Application.dataPath + "/_Sprites/Icons";
         if (!Directory.Exists(folderPath))
             Directory.CreateDirectory(folderPath);
 

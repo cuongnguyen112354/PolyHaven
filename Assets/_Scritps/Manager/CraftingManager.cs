@@ -89,6 +89,22 @@ public class CraftingManager : MonoBehaviour
         }
     }
 
+    public void UpdateRecipeUI()
+    {
+        if (recipeSelecting == null) return;
+
+        int index = 0;
+        bool craftBtnStatus = true;
+        foreach (Ingredient ingredient in recipeSelecting.ingredients)
+        {
+            if (!ingredientGOs[index].GetComponent<IngredientUI>().Init(ingredient))
+                craftBtnStatus = false;
+            ingredientGOs[index++].SetActive(true);
+        }
+
+        craftButton.interactable = craftBtnStatus;
+    }
+
     public void ResetUI()
     {
         iconItemResult.sprite = defaultIcon;

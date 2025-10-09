@@ -37,7 +37,11 @@ public class DataPersistence : MonoBehaviour
     // Save and Load All Game Data
     public void SaveGameData()
     {
-        GameData gameData = new(GetPlayerData(), GetInventoryData(), GetConstructionData());
+        GameData gameData = new (
+            GetPlayerData(),
+            GetInventoryData(),
+            GetConstructionData()
+        );
 
         string json = JsonUtility.ToJson(gameData, true);
         File.WriteAllText(Path, json);
