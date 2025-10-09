@@ -12,7 +12,7 @@ public class InteractObject : MonoBehaviour
     private int layerMask;
     private TMP_Text interactionInfo_Text;
 
-    const float MAX_INTERACTION_DISTANCE = 1.8f;
+    const float MAX_INTERACTION_DISTANCE = 1.75f;
 
     private InputSystem_Actions inputActions;
 

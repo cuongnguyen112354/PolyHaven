@@ -67,10 +67,10 @@ public class GameManager : MonoBehaviour
 
     void PlayingState()
     {
-        // darkBg.SetActive(false);
-        // pauseMenu.SetActive(false);
-        // inventoryPanel.SetActive(false);
-        // selectionPanel.SetActive(false);
+        darkBg.SetActive(false);
+        inventoryPanel.SetActive(false);
+        selectionPanel.SetActive(false);
+        pauseMenu.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
 

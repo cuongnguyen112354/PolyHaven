@@ -38,20 +38,6 @@ public class AudioManager : MonoBehaviour
     {
         foreach (Sound sound in soundSO.sounds)
             audioMap.TryAdd(sound.key, sound.audioClip);
-
-        LoadSound();
-    }
-
-    private void LoadSound()
-    {
-        musicAS.mute = !musicIsMute.isOn;
-        SFXAS.mute = !SFXIsMute.isOn;
-
-        musicIsMute.onValueChanged.AddListener(SetMusicMute);
-        SFXIsMute.onValueChanged.AddListener(SetSFXMute);
-
-        SetMusicVolume();
-        SetSFXVolume();
     }
 
     private void SetMusicMute(bool isOn)
@@ -99,5 +85,44 @@ public class AudioManager : MonoBehaviour
     {
         SFXAS.Stop();
         SubSFXAS.Stop();
+    }
+
+    public void Init(SoundData soundData)
+    {
+        musicIsMute.onValueChanged.AddListener(SetMusicMute);
+        SFXIsMute.onValueChanged.AddListener(SetSFXMute);
+
+        musicVolume.value = soundData.musicVolume;
+        musicIsMute.isOn = !soundData.musicIsMute;
+        SFXVolume.value = soundData.SFXVolume;
+        SFXIsMute.isOn = !soundData.SFXIsMute;
+    }
+
+    public SoundData GetSoundData()
+    {
+        return new SoundData
+        {
+            musicVolume = musicVolume.value,
+            musicIsMute = !musicIsMute.isOn,
+            SFXVolume = SFXVolume.value,
+            SFXIsMute = !SFXIsMute.isOn
+        };
+    }
+}
+
+[System.Serializable]
+public class SoundData
+{
+    public float musicVolume;
+    public bool musicIsMute;
+    public float SFXVolume;
+    public bool SFXIsMute;
+
+    public SoundData()
+    {
+        musicVolume = 0.8f;
+        musicIsMute = false;
+        SFXVolume = 0.8f;
+        SFXIsMute = false;
     }
 }

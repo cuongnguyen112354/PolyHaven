@@ -139,7 +139,7 @@ public class PlayerData
         hunger = maxHunger;
         rest = maxRest;
 
-        position = new Vector3(107, 32, 145);
-        rotation = new Vector3(0, -114, 0);
+        position = new Vector3(20, 3, 0);
+        rotation = new Vector3(0, -90, 0);
     }
 }

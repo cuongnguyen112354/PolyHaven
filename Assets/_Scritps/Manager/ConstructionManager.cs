@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -67,6 +68,11 @@ public class ConstructionManager : MonoBehaviour
         }
         return objectDatas;
     }
+
+    internal void Init(object v)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 [System.Serializable]
@@ -75,4 +81,11 @@ public class ObjectData
     public string itemName;
     public Vector3 position;
     public Quaternion rotation;
+
+    public ObjectData()
+    {
+        itemName = "Campfire";
+        position = new Vector3( (float) -76.5999984741211, (float) 1.2160568237304688, (float) -63.5);
+        rotation = new Quaternion(0, 0, 0, 1);
+    }
 }

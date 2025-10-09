@@ -30,18 +30,47 @@ public class Settings : MonoBehaviour
         }
     }
 
-    void Start()
+    public void Init(SettingsData settingsData)
     {
         lookSensitivitySlider.onValueChanged.AddListener(value => { lookSensitivityValue.text = value.ToString(); });
-        lookSensitivitySlider.value = 2;
-
         fpsDropdown.onValueChanged.AddListener(_ =>
         {
             Application.targetFrameRate = int.Parse(fpsDropdown.options[fpsDropdown.value].text);
         });
-        fpsDropdown.value = 3;
-
-        QualitySettings.vSyncCount = 1;
         qualityToggle.onValueChanged.AddListener(isOn => { QualitySettings.vSyncCount = isOn ? 1 : 0; });
+
+        lookSensitivitySlider.value = settingsData.lookSensitivity;
+        fpsDropdown.value = settingsData.fpsDropdownValue;
+        qualityToggle.isOn = settingsData.vSync;
+
+        AudioManager.Instance.Init(settingsData.soundData);
+    }
+
+    public SettingsData GetSettingsData()
+    {
+        return new SettingsData
+        {
+            lookSensitivity = (int)lookSensitivitySlider.value,
+            fpsDropdownValue = fpsDropdown.value,
+            vSync = qualityToggle.isOn,
+            soundData = AudioManager.Instance.GetSoundData()
+        };
+    }
+}
+
+[System.Serializable]
+public class SettingsData
+{
+    public int lookSensitivity;
+    public int fpsDropdownValue;
+    public bool vSync;
+    public SoundData soundData;
+
+    public SettingsData()
+    {
+        lookSensitivity = 2;
+        fpsDropdownValue = 3;
+        vSync = true;
+        soundData = new SoundData();
     }
 }
