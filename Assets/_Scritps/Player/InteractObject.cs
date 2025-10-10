@@ -25,11 +25,13 @@ public class InteractObject : MonoBehaviour
     {
         inputActions.Enable();
 
-        inputActions.Player.Interact.performed += _ => { Interact(); };
+        inputActions.Player.Interact.performed += _ => Interact();
     }
 
     void OnDisable()
     {
+        inputActions.Player.Interact.performed -= _ => Interact();
+
         inputActions.Disable();
     }
 
@@ -61,6 +63,8 @@ public class InteractObject : MonoBehaviour
 
     private void Interact()
     {
+        if (focusingObject == null || !GameManager.Instance.CompareGameState("Playing")) return;
+        
         if (focusingObject.TryGetComponent<IInteractable>(out var obj))
             obj.Interact();
     }

@@ -92,7 +92,8 @@ public class GameData
         SettingsData settingsData,
         PlayerData playerData,
         List<SlotData> inventoryData,
-        List<ObjectData> constructionData)
+        List<ObjectData> constructionData
+    )
     {
         this.settingsData = settingsData;
         this.playerData = playerData;

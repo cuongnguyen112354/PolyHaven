@@ -25,8 +25,7 @@ public class PickableObject : MonoBehaviour, IInteractable
             GameObject floatingTextPrefab = Resources.Load<GameObject>("_Prefabs/FloatingText");
             Vector3 spawnPosition = new(transform.position.x, transform.position.y + .5f, transform.position.z);
 
-            GameObject ft = Instantiate(floatingTextPrefab, spawnPosition, Quaternion.identity);
-            ft.GetComponent<FloatingTextWorld>().SetText($"+1 {itemData.itemName}");
+            UIManager.Instance.ShowPickupNotify(1, itemData.itemName);
 
             AudioManager.Instance.PlayAudioClip("pick_up");
             Destroy(gameObject);

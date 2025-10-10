@@ -25,10 +25,10 @@ public class Axe : MonoBehaviour, IEquipment
 
     void OnDisable()
     {
-        inputActions.Disable();
-
         inputActions.Equipment.Use.started -= _ => { usingBtnDown = true; };
         inputActions.Equipment.Use.canceled -= _ => { usingBtnDown = false; };
+
+        inputActions.Disable();
     }
 
     void Update()

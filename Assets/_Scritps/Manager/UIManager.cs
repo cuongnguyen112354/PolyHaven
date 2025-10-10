@@ -6,59 +6,64 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
-    [SerializeField] private UIAction[] uiActions;
+    [SerializeField] private PickupNotify pickupNotify;
 
-    private Dictionary<string, GameObject> uiActionDict = new();
-    private GameObject currentPanel;
+    // [SerializeField] private UIAction[] uiActions;
 
-    private InputSystem_Actions inputActions;
+    // private Dictionary<string, GameObject> uiActionDict = new();
+    // private GameObject currentPanel;
+
+    // private InputSystem_Actions inputActions;
 
     void Awake()
     {
         if (Instance == null)
             Instance = this;
-        else
-            Destroy(gameObject);
 
-        inputActions = new InputSystem_Actions();
+        // inputActions = new InputSystem_Actions();
     }
 
-    void OnEnable()
+    public void ShowPickupNotify(int quantity, string itemName)
     {
-        inputActions.Enable();
+        pickupNotify.ShowPickupNotification(quantity, itemName);
     }
 
-    void OnDisable()
-    {
-        inputActions.Disable();
-    }
+    // void OnEnable()
+    // {
+    //     inputActions.Enable();
+    // }
 
-    private void Start()
-    {
-        foreach (UIAction action in uiActions)
-            uiActionDict.TryAdd(action.panelName, action.panel);
+    // void OnDisable()
+    // {
+    //     inputActions.Disable();
+    // }
 
-        inputActions.UI.Inventory.performed += _ => OpenInventory();
-    }
+    // private void Start()
+    // {
+    //     foreach (UIAction action in uiActions)
+    //         uiActionDict.TryAdd(action.panelName, action.panel);
 
-    private void OpenInventory()
-    {
-        if (uiActionDict.TryGetValue("Inventory", out GameObject panel))
-        {
-            if (currentPanel == null)
-            {
-                currentPanel = panel;
-                currentPanel.SetActive(true);
-            }
-            else
-            {
-                currentPanel.SetActive(false);
+    //     inputActions.UI.Inventory.performed += _ => OpenInventory();
+    // }
 
-                currentPanel = panel;
-                currentPanel.SetActive(true);
-            }
-        }
-    }
+    // private void OpenInventory()
+    // {
+    //     if (uiActionDict.TryGetValue("Inventory", out GameObject panel))
+    //     {
+    //         if (currentPanel == null)
+    //         {
+    //             currentPanel = panel;
+    //             currentPanel.SetActive(true);
+    //         }
+    //         else
+    //         {
+    //             currentPanel.SetActive(false);
+
+    //             currentPanel = panel;
+    //             currentPanel.SetActive(true);
+    //         }
+    //     }
+    // }
 }
 
 [System.Serializable]
