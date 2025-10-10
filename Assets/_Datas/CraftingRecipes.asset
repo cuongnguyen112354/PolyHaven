@@ -27,13 +27,6 @@ MonoBehaviour:
       quantity: 4
     result: {fileID: 11400000, guid: 31539cf13634ebf4f827da33a1be7fcb, type: 2}
     resultAmount: 1
-  - ingredients:
-    - item: {fileID: 11400000, guid: 0ec8f2769a2952f468c156c850bc1c0a, type: 2}
-      quantity: 10
-    - item: {fileID: 11400000, guid: 04783c699a0b1cf4fb72ea0d898d406a, type: 2}
-      quantity: 7
-    result: {fileID: 11400000, guid: f1c01faa14291034898478d5523be5d4, type: 2}
-    resultAmount: 1
   propRecipes:
   - ingredients:
     - item: {fileID: 11400000, guid: 0ec8f2769a2952f468c156c850bc1c0a, type: 2}

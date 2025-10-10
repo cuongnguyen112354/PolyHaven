@@ -49,6 +49,7 @@ public class AudioManager : MonoBehaviour
     private void SetSFXMute(bool isOn)
     {
         SFXAS.mute = !isOn;
+        SubSFXAS.mute = !isOn;
         SFXVolume.interactable = isOn;
     }
 
@@ -81,7 +82,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void StopSound()
+    public void StopSFXSound()
     {
         SFXAS.Stop();
         SubSFXAS.Stop();

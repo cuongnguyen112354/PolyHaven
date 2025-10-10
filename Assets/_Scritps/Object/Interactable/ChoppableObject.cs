@@ -18,7 +18,7 @@ public class ChoppableObject : MonoBehaviour, IInteractable
 
     void ImpactFXEvent()
     {
-        AudioManager.Instance.StopSound();
+        AudioManager.Instance.StopSFXSound();
         AudioManager.Instance.PlayAudioClip("impact_fall");
     }
 
