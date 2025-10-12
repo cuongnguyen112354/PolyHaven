@@ -7,6 +7,18 @@ public class PickableObject : MonoBehaviour, IInteractable
     [SerializeField] private Sprite pickableTargetIcon;
     [SerializeField] private string textTutorial = "Press [E]";
 
+    // Randomly determine the quantity of items to pick up based on defined probabilities
+    private int RandomQty()
+    {
+        int result = Random.Range(0, 100);
+        if (result < 75)
+            return 1;
+        else if (result >= 75 && result < 95)
+            return 2;
+        else
+            return 3;
+    }
+
     public string GetItemName()
     {
         return itemData.itemName;
@@ -19,16 +31,18 @@ public class PickableObject : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        int itemQty = RandomQty();
+
         // Logic for picking up the item
-        if (InventoryManager.Instance.IsAddItem(itemData))
+        if (InventoryManager.Instance.IsAddItem(itemData, itemQty))
         {
-            GameObject floatingTextPrefab = Resources.Load<GameObject>("_Prefabs/FloatingText");
-            Vector3 spawnPosition = new(transform.position.x, transform.position.y + .5f, transform.position.z);
-
-            UIManager.Instance.ShowPickupNotify(1, itemData.itemName);
-
+            UIManager.Instance.ShowPickupNotify(itemQty, itemData.itemName);
             AudioManager.Instance.PlayAudioClip("pick_up");
-            Destroy(gameObject);
+
+            if (itemData.itemName == "Wood")
+                gameObject.SetActive(false);
+            else
+                Destroy(gameObject);
         }
     }
 }

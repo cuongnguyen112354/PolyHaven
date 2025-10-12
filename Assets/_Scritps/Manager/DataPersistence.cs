@@ -7,6 +7,8 @@ public class DataPersistence : MonoBehaviour
 {
     public static DataPersistence Instance;
 
+    [SerializeField] private InitDataSO initDataSO;
+
     // C:\Users\Chi Cuong\AppData\LocalLow\DefaultCompany\PolyHaven\data.json
     private string Path => Application.persistentDataPath + "/data.json";
 
@@ -56,27 +58,26 @@ public class DataPersistence : MonoBehaviour
 
     public void LoadGameData()
     {
+        GameData gameData;
+
         if (File.Exists(Path))
         {
             string json = File.ReadAllText(Path);
-            GameData gameData = JsonUtility.FromJson<GameData>(json);
-
-            if (Settings.Instance != null)
-                Settings.Instance.Init(gameData.settingsData);
-            if (gameData.playerData != null)
-                PlayerHealth.Instance.Init(gameData.playerData);
-            if (gameData.inventoryData != null)
-                InventoryManager.Instance.Init(gameData.inventoryData);
-            if (gameData.constructionData != null)
-                ConstructionManager.Instance.Init(gameData.constructionData);
+            gameData = JsonUtility.FromJson<GameData>(json);
         }
         else
         {
-            Settings.Instance.Init(new SettingsData());
-            PlayerHealth.Instance.Init(new PlayerData());
-            InventoryManager.Instance.Init(new List<SlotData>());
-            ConstructionManager.Instance.Init(new List<ObjectData> { new() });
+            gameData = new (initDataSO);
         }
+        
+        if (gameData.settingsData != null)
+            Settings.Instance.Init(gameData.settingsData);
+        if (gameData.playerData != null)
+            PlayerHealth.Instance.Init(gameData.playerData);
+        if (gameData.inventoryData != null)
+            InventoryManager.Instance.Init(gameData.inventoryData);
+        if (gameData.constructionData != null)
+            ConstructionManager.Instance.Init(gameData.constructionData);
     }
 }
 
@@ -99,5 +100,13 @@ public class GameData
         this.playerData = playerData;
         this.inventoryData = inventoryData;
         this.constructionData = constructionData;
+    }
+
+    public GameData(InitDataSO initDataSO)
+    {
+        settingsData = initDataSO.settingsData;
+        playerData = initDataSO.playerData;
+        inventoryData = initDataSO.inventoryData;
+        constructionData = initDataSO.constructionData;
     }
 }

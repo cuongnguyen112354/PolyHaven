@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbbe98327b297db479b496ef353f2960, type: 3}
+  m_Name: InitDataSO
+  m_EditorClassIdentifier: 
+  settingsData:
+    lookSensitivity: 2
+    fpsDropdownValue: 3
+    vSync: 1
+    soundData:
+      musicVolume: 0.8
+      musicIsMute: 0
+      SFXVolume: 0.8
+      SFXIsMute: 0
+  playerData:
+    maxHunger: 100
+    maxRest: 100
+    hunger: 96
+    rest: 99
+    position: {x: 16.969648, y: 2.3704097, z: -1.4895395}
+    rotation: {x: 0, y: 351.30023, z: 0}
+  inventoryData: []
+  constructionData:
+  - itemName: Campfire
+    position: {x: -76.700005, y: 1.2160568, z: -63.600002}
+    rotation: {x: 0, y: 0, z: 0, w: 0}

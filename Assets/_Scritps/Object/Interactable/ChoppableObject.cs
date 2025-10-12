@@ -1,3 +1,4 @@
+using JoaoMilone.Pooler.Controller;
 using UnityEngine;
 
 public class ChoppableObject : MonoBehaviour, IInteractable
@@ -8,6 +9,8 @@ public class ChoppableObject : MonoBehaviour, IInteractable
     [SerializeField] private GameObject woodPrefab;
     [SerializeField] private Transform[] spawnPoints;
 
+    [SerializeField] private float woodDamping = 3f;
+
     private int hp = 5;
     private Animator animator;
 
@@ -16,16 +19,22 @@ public class ChoppableObject : MonoBehaviour, IInteractable
         animator = GetComponentInChildren<Animator>();
     }
 
-    void ImpactFXEvent()
+    void Dead()
     {
         AudioManager.Instance.StopSFXSound();
         AudioManager.Instance.PlayAudioClip("impact_fall");
-    }
-
-    void EndFallingEvent()
-    {
         foreach (Transform transform in spawnPoints)
-            Instantiate(woodPrefab, transform.position, Quaternion.Euler(transform.eulerAngles));
+        {
+            GameObject wood = ObjectPooler.ME.RequestObject("wood", transform.position, Quaternion.Euler(transform.rotation.eulerAngles));
+            
+            if (!wood.GetComponent<Rigidbody>())
+            {
+                wood.AddComponent<Rigidbody>().linearDamping = woodDamping;
+            }
+        }
+
+        enabled = false;
+        GetComponent<Collider>().enabled = false;
         Destroy(transform.parent.gameObject);
     }
 
@@ -41,18 +50,16 @@ public class ChoppableObject : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (hp > 0)
+        if (--hp > 0)
         {
             AudioManager.Instance.PlayAudioClip("chop");
-            animator.SetTrigger("hit");
+            animator.Play("Hitted", 0, 0f);
         }
-
-        if (--hp == 0)
+        else
         {
-            AudioManager.Instance.PlayAudioClip("cracking");
-            animator.SetTrigger("fall");
-            enabled = false;
-            GetComponent<Collider>().enabled = false;
+            // AudioManager.Instance.PlayAudioClip("cracking");
+            // animator.SetTrigger("fall");
+            Dead();
         }
     }
 }

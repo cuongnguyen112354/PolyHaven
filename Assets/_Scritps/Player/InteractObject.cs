@@ -25,12 +25,12 @@ public class InteractObject : MonoBehaviour
     {
         inputActions.Enable();
 
-        inputActions.Player.Interact.performed += _ => Interact();
+        inputActions.Player.Pickup.performed += _ => Pickup();
     }
 
     void OnDisable()
     {
-        inputActions.Player.Interact.performed -= _ => Interact();
+        inputActions.Player.Pickup.performed -= _ => Pickup();
 
         inputActions.Disable();
     }
@@ -46,8 +46,10 @@ public class InteractObject : MonoBehaviour
             !Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, MAX_INTERACTION_DISTANCE, layerMask, QueryTriggerInteraction.Ignore) ||
             hit.collider.gameObject.GetComponent<IInteractable>() == null)
         {
-            interactionInfo_Text.gameObject.SetActive(false);
+            focusingObject = null;
             
+            interactionInfo_Text.gameObject.SetActive(false);
+
             targetIcon.sprite = defalutTargetIcon;
             targetIcon.SetNativeSize();
 
@@ -61,11 +63,11 @@ public class InteractObject : MonoBehaviour
         interactionInfo_Text.gameObject.SetActive(true);
     }
 
-    private void Interact()
+    private void Pickup()
     {
         if (focusingObject == null || !GameManager.Instance.CompareGameState("Playing")) return;
         
-        if (focusingObject.TryGetComponent<IInteractable>(out var obj))
+        if (focusingObject.TryGetComponent<PickableObject>(out var obj))
             obj.Interact();
     }
 
