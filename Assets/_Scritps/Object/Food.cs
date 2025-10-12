@@ -54,7 +54,7 @@ public class Food : MonoBehaviour, IEquipment
             {
                 isUsing = true;
 
-                AudioManager.Instance.PlayAudioClip("apple_eat");
+                AudioManager.Instance.PlayAudioClip("eat");
                 animator.SetTrigger("use");
             }
         }

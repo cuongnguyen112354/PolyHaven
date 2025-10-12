@@ -246,7 +246,9 @@ MonoBehaviour:
   - {fileID: 2881865544730838212}
   - {fileID: 6957267424665153433}
   - {fileID: 2766255587858550978}
-  mass: 5
+  chopSound: {fileID: 8300000, guid: 6f30299d25b8b9e4cad274f0eeb4abda, type: 3}
+  impactFallSound: {fileID: 8300000, guid: 7915d86eacffc3c45a6b4b2eda7232fc, type: 3}
+  woodDamping: 3
 --- !u!1 &5647543984739767147
 GameObject:
   m_ObjectHideFlags: 0

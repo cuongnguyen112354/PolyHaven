@@ -38,11 +38,11 @@ public class Pickaxe : MonoBehaviour, IEquipment
 
     void HitEvent()
     {
-        if (InteractObject.focusingObject &&
-            InteractObject.focusingObject.TryGetComponent<ChoppableObject>(out var choppableObject))
-        {
-            choppableObject.Interact();
-        }
+        // if (InteractObject.focusingObject &&
+        //     InteractObject.focusingObject.TryGetComponent<ChoppableObject>(out var choppableObject))
+        // {
+        //     choppableObject.Interact();
+        // }
     }
 
     private void DoneUsingEvent()

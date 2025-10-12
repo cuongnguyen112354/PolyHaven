@@ -32,12 +32,16 @@ public class Settings : MonoBehaviour
 
     public void Init(SettingsData settingsData)
     {
-        lookSensitivitySlider.onValueChanged.AddListener(value => { lookSensitivityValue.text = value.ToString(); });
-        fpsDropdown.onValueChanged.AddListener(_ =>
-        {
+        lookSensitivitySlider.onValueChanged.AddListener(value => {
+            lookSensitivityValue.text = value.ToString(); 
+        });
+        fpsDropdown.onValueChanged.AddListener(_ => {
             Application.targetFrameRate = int.Parse(fpsDropdown.options[fpsDropdown.value].text);
         });
-        qualityToggle.onValueChanged.AddListener(isOn => { QualitySettings.vSyncCount = isOn ? 1 : 0; });
+        qualityToggle.onValueChanged.AddListener(isOn => {
+            QualitySettings.vSyncCount = isOn ? 1 : 0;
+            fpsDropdown.interactable = !isOn;
+        });
 
         lookSensitivitySlider.value = settingsData.lookSensitivity;
         fpsDropdown.value = settingsData.fpsDropdownValue;

@@ -22,7 +22,7 @@ public class ChoppableObject : MonoBehaviour, IInteractable
     void Dead()
     {
         AudioManager.Instance.StopSFXSound();
-        AudioManager.Instance.PlayAudioClip("impact_fall");
+        AudioManager.Instance.PlayAudioClip("cracking");
         foreach (Transform transform in spawnPoints)
         {
             GameObject wood = ObjectPooler.ME.RequestObject("wood", transform.position, Quaternion.Euler(transform.rotation.eulerAngles));
@@ -52,7 +52,7 @@ public class ChoppableObject : MonoBehaviour, IInteractable
     {
         if (--hp > 0)
         {
-            AudioManager.Instance.PlayAudioClip("chop");
+            AudioManager.Instance.PlayAudioClip("hit_tree");
             animator.Play("Hitted", 0, 0f);
         }
         else

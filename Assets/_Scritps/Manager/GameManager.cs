@@ -29,14 +29,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         if (Instance == null)
-        {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
     }
 
     public void SetGameState(GameState newState)
@@ -113,7 +106,7 @@ public class GameManager : MonoBehaviour
     {
         if (panelName == "Inventory")
             inventoryPanel.SetActive(true);
-        else if (panelName == "Selection")
+        else if (panelName == "Crafting")
             selectionPanel.SetActive(true);
 
         darkBg.SetActive(true);

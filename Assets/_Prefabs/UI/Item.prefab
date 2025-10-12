@@ -89,4 +89,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parentAfterDrag: {fileID: 0}
-  rootTransform: {fileID: 3841451966479075581, guid: 588ff1809e2b3284fadc1dca86a0b272, type: 3}
+  putUpAC: {fileID: 8300000, guid: 1cd83452c259fbf45b9b5626cb9536b6, type: 3}
+  putDownAC: {fileID: 8300000, guid: 976112dc9084c1040b53319b58ed462e, type: 3}

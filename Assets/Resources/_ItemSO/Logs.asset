@@ -16,9 +16,6 @@ MonoBehaviour:
   description: 
   icon: {fileID: 21300000, guid: 019fdc9a561482341a2f9ea3a0dd3a00, type: 3}
   maxStackSize: 1
-  ingredients:
-  - item: {fileID: 11400000, guid: 0ec8f2769a2952f468c156c850bc1c0a, type: 2}
-    quantity: 10
   tutorialSteps:
   - description: Place
     interaction: {fileID: 21300000, guid: 4d79d2f4f1e764a41853aa24d11ad665, type: 3}

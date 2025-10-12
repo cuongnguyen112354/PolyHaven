@@ -7,6 +7,7 @@ public class PickableObject : MonoBehaviour, IInteractable
     [SerializeField] private Sprite pickableTargetIcon;
     [SerializeField] private string textTutorial = "Press [E]";
 
+
     // Randomly determine the quantity of items to pick up based on defined probabilities
     private int RandomQty()
     {

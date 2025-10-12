@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using System.Collections.Generic;
 
 public class GameController : MonoBehaviour
 {
@@ -12,6 +11,8 @@ public class GameController : MonoBehaviour
     private float elapsedTime = 0f;
     private readonly float refreshTime = .5f; // Cập nhật mỗi 1 giây
 
+    private InputSystem_Actions inputActions;
+
     void Awake()
     {
         if (Instance == null)
@@ -22,6 +23,26 @@ public class GameController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        inputActions = new InputSystem_Actions();
+    }
+
+    void OnEnable()
+    {
+        inputActions.Enable();
+
+        inputActions.UI.Inventory.performed += ctx => OnInventory();
+        inputActions.UI.Crafting.performed += ctx => OnCrafting();
+        inputActions.UI.Escape.performed += ctx => OnPause();
+    }
+
+    void OnDisable()
+    {
+        inputActions.UI.Inventory.performed -= ctx => OnInventory();
+        inputActions.UI.Crafting.performed -= ctx => OnCrafting();
+        inputActions.UI.Escape.performed -= ctx => OnPause();
+
+        inputActions.Disable();
     }
 
     void Start()
@@ -36,38 +57,48 @@ public class GameController : MonoBehaviour
     {
         if (GameManager.Instance.CompareGameState("Loading")) return;
 
-        if (!GameManager.Instance.CompareGameState("Pause"))
-        {
-            if (Input.GetKeyDown(KeyCode.Tab))
-                GameManager.Instance.ActiveUI("Inventory");
-
-            if (Input.GetKeyDown(KeyCode.Q))
-                GameManager.Instance.ActiveUI("Selection");
-        }
-
-        if (GameManager.Instance.CompareGameState("Playing"))
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-                GameManager.Instance.SetGameState(GameManager.GameState.Paused);
-        }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-                ResumeGame();
-        }
-
         frameCount++;
         elapsedTime += Time.deltaTime;
 
         if (elapsedTime >= refreshTime)
         {
             int fps = Mathf.RoundToInt(frameCount / elapsedTime);
-            actualyFPSText.text = "FPS: " + fps;
+            actualyFPSText.text = $"{fps}";
 
             // Reset đếm
             frameCount = 0;
             elapsedTime = 0f;
         }
+    }
+
+    private void OnInventory()
+    {
+        if (GameManager.Instance.CompareGameState("Loading")) return;
+
+        if (GameManager.Instance.CompareGameState("Playing"))
+            GameManager.Instance.ActiveUI("Inventory");
+        else if (GameManager.Instance.CompareGameState("UI"))
+            ResumeGame();
+    }
+
+    private void OnCrafting()
+    {
+        if (GameManager.Instance.CompareGameState("Loading")) return;
+
+        if (GameManager.Instance.CompareGameState("Playing"))
+            GameManager.Instance.ActiveUI("Crafting");
+        else if (GameManager.Instance.CompareGameState("UI"))
+            ResumeGame();
+    }
+
+    private void OnPause()
+    {
+        if (GameManager.Instance.CompareGameState("Loading")) return;
+
+        if (GameManager.Instance.CompareGameState("Playing"))
+            GameManager.Instance.SetGameState(GameManager.GameState.Paused);
+        else
+            ResumeGame();
     }
 
     public void ResumeGame()

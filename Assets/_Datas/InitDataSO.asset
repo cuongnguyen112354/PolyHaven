@@ -24,10 +24,10 @@ MonoBehaviour:
   playerData:
     maxHunger: 100
     maxRest: 100
-    hunger: 96
-    rest: 99
-    position: {x: 16.969648, y: 2.3704097, z: -1.4895395}
-    rotation: {x: 0, y: 351.30023, z: 0}
+    hunger: 100
+    rest: 100
+    position: {x: 20, y: 3, z: 0}
+    rotation: {x: 0, y: -90, z: 0}
   inventoryData: []
   constructionData:
   - itemName: Campfire

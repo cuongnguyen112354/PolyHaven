@@ -69,6 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8809622664057220781}
+  eatClip: {fileID: 8300000, guid: 7228fee6119b1e645bbbfc09a8b61418, type: 3}
 --- !u!1 &6557065782001222754
 GameObject:
   m_ObjectHideFlags: 0
