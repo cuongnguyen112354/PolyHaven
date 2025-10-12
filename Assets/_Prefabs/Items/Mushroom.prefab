@@ -123,5 +123,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 8ada185ff38806741b531dfc0107e1e3, type: 2}
   pickableTargetIcon: {fileID: 21300000, guid: a405f336bf0475e468cc0d1df4dcdfab, type: 3}
-  textTutorial: 'Press [E]'
-  pickUpClip: {fileID: 8300000, guid: f2371558d76e00140a90f79ec38a8c86, type: 3}
+  textTutorial: '[E] to Pickup'

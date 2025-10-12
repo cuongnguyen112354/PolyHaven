@@ -4,7 +4,7 @@ using UnityEngine;
 public class ChoppableObject : MonoBehaviour, IInteractable
 {
     [SerializeField] private Sprite pickableTargetIcon;
-    [SerializeField] private string textTutorial = "[Left Mouse]";
+    [SerializeField] private string textTutorial;
 
     [SerializeField] private GameObject woodPrefab;
     [SerializeField] private Transform[] spawnPoints;
