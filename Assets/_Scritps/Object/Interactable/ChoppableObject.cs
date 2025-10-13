@@ -1,19 +1,8 @@
 using JoaoMilone.Pooler.Controller;
 using UnityEngine;
 
-public class ChoppableObject : ObjectLife
+public class ChoppableObject : AbObjectLife
 {
-    [SerializeField] private Transform[] spawnPoints;
-
-    private int currenthealth;
-    private Animator animator;
-
-    void Start()
-    {
-        currenthealth = objectSO.maxHealth;
-        animator = GetComponentInChildren<Animator>();
-    }
-
     public override void Affected(int damage)
     {
         currenthealth -= damage;

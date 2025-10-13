@@ -100,7 +100,7 @@ public class InventoryManager : MonoBehaviour
 
     private void RemoveSlotItem(int slotIndex)
     {
-        string itemName = DicSlot[slotIndex].item.itemName;
+        string itemName = DicSlot[slotIndex].itemSO.itemName;
 
         if (slotIndex == slotSelected)
         {
@@ -185,7 +185,7 @@ public class InventoryManager : MonoBehaviour
 
     public void TrashSlotItem(int slotIndex)
     {
-        string itemName = DicSlot[slotIndex].item.itemName;
+        string itemName = DicSlot[slotIndex].itemSO.itemName;
 
         if (slotIndex == slotSelected)
         {
@@ -291,7 +291,7 @@ public class InventoryManager : MonoBehaviour
 
         if (basic)
         {
-            if (DicName.TryGetValue(DicSlot[firstSlot].item.itemName, out List<int> slots))
+            if (DicName.TryGetValue(DicSlot[firstSlot].itemSO.itemName, out List<int> slots))
                 slots[slots.IndexOf(firstSlot)] = lastSlot;
 
             DicSlot[lastSlot] = DicSlot[firstSlot];
@@ -302,9 +302,9 @@ public class InventoryManager : MonoBehaviour
         }
         else
         {
-            if (DicName.TryGetValue(DicSlot[firstSlot].item.itemName, out List<int> fslots))
+            if (DicName.TryGetValue(DicSlot[firstSlot].itemSO.itemName, out List<int> fslots))
                 fslots[fslots.IndexOf(firstSlot)] = lastSlot;
-            if (DicName.TryGetValue(DicSlot[lastSlot].item.itemName, out List<int> lslots))
+            if (DicName.TryGetValue(DicSlot[lastSlot].itemSO.itemName, out List<int> lslots))
                 lslots[lslots.IndexOf(lastSlot)] = firstSlot;
 
             Slot slot = DicSlot[firstSlot];
@@ -386,7 +386,7 @@ public class InventoryManager : MonoBehaviour
             if (!itemExist.Contains(slotData.itemName))
                 itemExist.Add(slotData.itemName);
 
-            ItemSO item = Resources.Load<ItemSO>($"_ItemSO/{slotData.itemName}");
+            ItemSO item = Resources.Load<ItemSO>($"_ItemSO/{slotData.typeItem}/{slotData.itemName}");
 
             AddItemToSlot(slotData.slotIndex, item, slotData.quantity);
         }
@@ -409,6 +409,7 @@ public class InventoryManager : MonoBehaviour
                     {
                         slotIndex = index,
                         itemName = entry.Key,
+                        typeItem = slot.itemSO.GetType().Name,
                         quantity = slot.quantity
                     });
                 }
@@ -422,36 +423,36 @@ public class InventoryManager : MonoBehaviour
 
 public class Slot
 {
-    public ItemSO item;
+    public ItemSO itemSO;
     public int quantity;
 
-    public int SpaceLeft => item != null ? item.maxStackSize - quantity : 0;
+    public int SpaceLeft => itemSO != null ? itemSO.maxStackSize - quantity : 0;
 
-    public Slot(ItemSO item, int quantity)
+    public Slot(ItemSO itemSO, int quantity)
     {
-        this.item = item;
+        this.itemSO = itemSO;
         this.quantity = quantity;
     }
 
     public void SpawnItem()
     {
-        item.SpawnItem();
+        itemSO.SpawnItem();
     }
 
     public void UpdatePlayerIndexs()
     {
-        if (item is FoodSO foodSO)
+        if (itemSO is FoodSO foodSO)
             foodSO.UpdatePlayerIndexs();
     }
 
     public void DespawnItem()
     {
-        item.DespawnItem();
+        itemSO.DespawnItem();
     }
 
     public void PutAway()
     {
-        item.PutAway();
+        itemSO.PutAway();
     }
 }
 
@@ -460,5 +461,6 @@ public class SlotData
 {
     public int slotIndex;
     public string itemName;
+    public string typeItem;
     public int quantity;
 }

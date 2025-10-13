@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewTool", menuName = "ScriptableObjects/Items/Tool")]
@@ -24,8 +23,9 @@ public class ToolSO : CraftableSO
 
         Transform parentTransform = PlayerController.Instance.handPosition.transform;
         GameObject model = Resources.Load<GameObject>($"_Models/Tools/{itemName}");
-        
+
         itemModel = Instantiate(model, parentTransform.position, model.transform.rotation);
+        itemModel.GetComponent<AbTool>().Init(this);
         itemModel.transform.SetParent(parentTransform);
         itemModel.name = itemName;
 
