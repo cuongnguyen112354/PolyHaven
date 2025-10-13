@@ -32,7 +32,7 @@ public class ConstructionManager : MonoBehaviour
         if (!placedObjects.ContainsKey(itemName))
             placedObjects[itemName] = new List<GameObject>();
 
-        GameObject prefab = Resources.Load<GameObject>($"_Models/Retrievable/{itemName}");
+        GameObject prefab = Resources.Load<GameObject>($"_Models/Retrievables/{itemName}");
         GameObject obj = Instantiate(prefab);
 
         obj.name = itemName;

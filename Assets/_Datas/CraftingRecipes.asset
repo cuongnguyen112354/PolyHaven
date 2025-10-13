@@ -13,31 +13,15 @@ MonoBehaviour:
   m_Name: CraftingRecipes
   m_EditorClassIdentifier: 
   toolRecipes:
-  - ingredients:
-    - item: {fileID: 11400000, guid: 0ec8f2769a2952f468c156c850bc1c0a, type: 2}
-      quantity: 10
-    - item: {fileID: 11400000, guid: 04783c699a0b1cf4fb72ea0d898d406a, type: 2}
-      quantity: 7
-    result: {fileID: 11400000, guid: c0f67a3806c93504e95c2efee3cfb1f5, type: 2}
+  - result: {fileID: 11400000, guid: c0f67a3806c93504e95c2efee3cfb1f5, type: 2}
     resultAmount: 1
-  - ingredients:
-    - item: {fileID: 11400000, guid: 0ec8f2769a2952f468c156c850bc1c0a, type: 2}
-      quantity: 7
-    - item: {fileID: 11400000, guid: 04783c699a0b1cf4fb72ea0d898d406a, type: 2}
-      quantity: 4
-    result: {fileID: 11400000, guid: 31539cf13634ebf4f827da33a1be7fcb, type: 2}
+  - result: {fileID: 11400000, guid: 31539cf13634ebf4f827da33a1be7fcb, type: 2}
     resultAmount: 1
   propRecipes:
-  - ingredients:
-    - item: {fileID: 11400000, guid: 0ec8f2769a2952f468c156c850bc1c0a, type: 2}
-      quantity: 5
-    - item: {fileID: 11400000, guid: 04783c699a0b1cf4fb72ea0d898d406a, type: 2}
-      quantity: 10
-    result: {fileID: 11400000, guid: d97ed8ff0d823374a91cbce0b294021e, type: 2}
+  - result: {fileID: 11400000, guid: d97ed8ff0d823374a91cbce0b294021e, type: 2}
     resultAmount: 1
-  - ingredients:
-    - item: {fileID: 11400000, guid: 0ec8f2769a2952f468c156c850bc1c0a, type: 2}
-      quantity: 13
-    result: {fileID: 11400000, guid: f7d2248ba5fab9a45b7969d7ed397108, type: 2}
+  - result: {fileID: 11400000, guid: f7d2248ba5fab9a45b7969d7ed397108, type: 2}
     resultAmount: 1
-  houseRecipes: []
+  houseRecipes:
+  - result: {fileID: 11400000, guid: 57bde02981ec27644922b2f65d19985e, type: 2}
+    resultAmount: 1

@@ -74,7 +74,7 @@ public class CraftingManager : MonoBehaviour
 
         int index = 0;
         bool craftBtnStatus = true;
-        foreach (Ingredient ingredient in recipe.ingredients)
+        foreach (Ingredient ingredient in recipe.result.ingredients)
         {
             if (!ingredientGOs[index].GetComponent<IngredientUI>().Init(ingredient))
                 craftBtnStatus = false;
@@ -95,7 +95,7 @@ public class CraftingManager : MonoBehaviour
 
         int index = 0;
         bool craftBtnStatus = true;
-        foreach (Ingredient ingredient in recipeSelecting.ingredients)
+        foreach (Ingredient ingredient in recipeSelecting.result.ingredients)
         {
             if (!ingredientGOs[index].GetComponent<IngredientUI>().Init(ingredient))
                 craftBtnStatus = false;
@@ -126,7 +126,7 @@ public class CraftingManager : MonoBehaviour
     {
         if (InventoryManager.Instance.IsAddItem(recipeSelecting.result))
         {
-            InventoryManager.Instance.RemoveItems(recipeSelecting.ingredients);
+            InventoryManager.Instance.RemoveItems(recipeSelecting.result.ingredients);
             ResetUI();
         }
     }

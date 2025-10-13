@@ -15,7 +15,7 @@ public class CraftingRecipesSO : ScriptableObject
 [System.Serializable]
 public class CraftingRecipe
 {
-    public List<Ingredient> ingredients;
+    // public List<Ingredient> ingredients;
     // public bool isOwned;
     public CraftableSO result;
     public int resultAmount = 1;

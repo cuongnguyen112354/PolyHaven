@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class RetrievableObject : MonoBehaviour, IInteractable
 {
-    [SerializeField] private ItemSO itemData;
+    [SerializeField] private CraftableSO itemData;
 
     public string GetItemName()
     {

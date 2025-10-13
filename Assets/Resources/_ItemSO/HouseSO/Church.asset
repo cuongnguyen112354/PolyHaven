@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c56b62d636a0cc4489b851366f3c9a49, type: 3}
+  m_Name: Church
+  m_EditorClassIdentifier: 
+  itemName: Church
+  description: 
+  icon: {fileID: 21300000, guid: 782ecae5a066a1e4e809e4ee3ff8c10a, type: 3}
+  maxStackSize: 1
+  targetIcon: {fileID: 21300000, guid: a405f336bf0475e468cc0d1df4dcdfab, type: 3}
+  typeTextTutorial: 1
+  ingredients:
+  - item: {fileID: 11400000, guid: 0ec8f2769a2952f468c156c850bc1c0a, type: 2}
+    quantity: 55
+  - item: {fileID: 11400000, guid: 04783c699a0b1cf4fb72ea0d898d406a, type: 2}
+    quantity: 43
