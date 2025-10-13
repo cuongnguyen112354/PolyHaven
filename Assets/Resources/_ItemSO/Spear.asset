@@ -16,6 +16,8 @@ MonoBehaviour:
   description: 
   icon: {fileID: 21300000, guid: 5522517283767b94da83a3817870b7c8, type: 3}
   maxStackSize: 1
+  targetIcon: {fileID: 21300000, guid: a405f336bf0475e468cc0d1df4dcdfab, type: 3}
+  typeTextTutorial: 0
   damage: 3
   durability: 2
   tutorialSteps:

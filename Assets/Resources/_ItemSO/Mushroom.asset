@@ -16,6 +16,8 @@ MonoBehaviour:
   description: 
   icon: {fileID: 21300000, guid: 3577621649cc980489705331952d2004, type: 3}
   maxStackSize: 49
+  targetIcon: {fileID: 21300000, guid: a405f336bf0475e468cc0d1df4dcdfab, type: 3}
+  typeTextTutorial: 0
   hungerRestore: 5
   tutorialSteps:
   - description: Eat

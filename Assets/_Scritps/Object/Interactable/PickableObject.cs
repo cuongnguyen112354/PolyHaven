@@ -4,10 +4,6 @@ public class PickableObject : MonoBehaviour, IInteractable
 {
     [SerializeField] private ItemSO itemData;
 
-    [SerializeField] private Sprite pickableTargetIcon;
-    [SerializeField] private string textTutorial;
-
-
     // Randomly determine the quantity of items to pick up based on defined probabilities
     private int RandomQty()
     {
@@ -27,7 +23,7 @@ public class PickableObject : MonoBehaviour, IInteractable
 
     public (Sprite, string) HowInteract()
     {
-        return (pickableTargetIcon, textTutorial);
+        return (itemData.targetIcon, itemData.textTutorial);
     }
 
     public void Affected(int damage)
@@ -40,7 +36,7 @@ public class PickableObject : MonoBehaviour, IInteractable
             UIManager.Instance.ShowPickupNotify(itemQty, itemData.itemName);
             AudioManager.Instance.PlayAudioClip("pick_up");
 
-            if (itemData.itemName == "Wood")
+            if (gameObject.GetComponent<Rigidbody>())
                 gameObject.SetActive(false);
             else
                 Destroy(gameObject);

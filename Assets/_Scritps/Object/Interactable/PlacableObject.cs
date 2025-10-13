@@ -3,23 +3,15 @@ using UnityEngine;
 public class PlacableObject : MonoBehaviour
 {
     [SerializeField] private int distanceToPlace = 50;
-    
-    [Header("----------GameObjects will activate after Place----------")]
-    [SerializeField] private GameObject[] gameObjects;
-    [Header("----------MonoBehaviour will activate after Place----------")]
-    [SerializeField] private MonoBehaviour[] scripts;
+    [SerializeField] private float gridSize = 0.1f;
 
     private MeshRenderer meshRenderer;
-    private Material sourceMat;
     private int layerMask;
     private bool isValid = true;
-    private float gridSize = 0.1f;
 
     public void Init()
     {
         meshRenderer = GetComponent<MeshRenderer>();
-        sourceMat = meshRenderer.material;
-        gameObject.layer = LayerMask.NameToLayer("Ghost");
         layerMask = ~LayerMask.GetMask("Ghost", "Player");
 
         // Đảm bảo MeshCollider là trigger

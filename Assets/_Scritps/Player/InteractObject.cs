@@ -66,9 +66,11 @@ public class InteractObject : MonoBehaviour
     private void Pickup()
     {
         if (focusingObject == null || !GameManager.Instance.CompareGameState("Playing")) return;
-        
-        if (focusingObject.TryGetComponent<PickableObject>(out var obj))
-            obj.Affected(0);
+
+        if (focusingObject.TryGetComponent<PickableObject>(out var item))
+            item.Affected(0);
+        else if (focusingObject.TryGetComponent<RetrievableObject>(out var prop))
+            prop.Affected(0);
     }
 
     public void SetInteractionText(TMP_Text _TMP_Text)

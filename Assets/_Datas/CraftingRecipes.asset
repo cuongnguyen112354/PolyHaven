@@ -35,4 +35,9 @@ MonoBehaviour:
       quantity: 10
     result: {fileID: 11400000, guid: d97ed8ff0d823374a91cbce0b294021e, type: 2}
     resultAmount: 1
+  - ingredients:
+    - item: {fileID: 11400000, guid: 0ec8f2769a2952f468c156c850bc1c0a, type: 2}
+      quantity: 13
+    result: {fileID: 11400000, guid: f7d2248ba5fab9a45b7969d7ed397108, type: 2}
+    resultAmount: 1
   houseRecipes: []

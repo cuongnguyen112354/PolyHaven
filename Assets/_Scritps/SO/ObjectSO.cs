@@ -8,7 +8,7 @@ public class ObjectSO : ScriptableObject
     public int maxHealth = 100;
     public float linearDamping = 5f;
 
-    public Sprite pickableTargetIcon;
+    [Header("How to Interact")]
+    public Sprite targetIcon;
     public string textTutorial;
-    public string interactSoundKey;
 }
