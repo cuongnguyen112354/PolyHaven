@@ -27,3 +27,7 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 7915d86eacffc3c45a6b4b2eda7232fc, type: 3}
   - key: eat
     audioClip: {fileID: 8300000, guid: 7228fee6119b1e645bbbfc09a8b61418, type: 3}
+  - key: mining
+    audioClip: {fileID: 8300000, guid: 0fe06b92b2e3233488655075954ce2d3, type: 3}
+  - key: rock-destroy
+    audioClip: {fileID: 8300000, guid: e128e7eec1dca244396a08280dfa1ae5, type: 3}

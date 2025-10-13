@@ -1,65 +1,47 @@
 using JoaoMilone.Pooler.Controller;
 using UnityEngine;
 
-public class ChoppableObject : MonoBehaviour, IInteractable
+public class ChoppableObject : ObjectLife
 {
-    [SerializeField] private Sprite pickableTargetIcon;
-    [SerializeField] private string textTutorial;
-
-    [SerializeField] private GameObject woodPrefab;
     [SerializeField] private Transform[] spawnPoints;
 
-    [SerializeField] private float woodDamping = 3f;
-
-    private int hp = 5;
+    private int currenthealth;
     private Animator animator;
 
     void Start()
     {
+        currenthealth = objectSO.maxHealth;
         animator = GetComponentInChildren<Animator>();
     }
 
-    void Dead()
+    public override void Affected(int damage)
     {
-        AudioManager.Instance.StopSFXSound();
-        AudioManager.Instance.PlayAudioClip("cracking");
-        foreach (Transform transform in spawnPoints)
-        {
-            GameObject wood = ObjectPooler.ME.RequestObject("wood", transform.position, Quaternion.Euler(transform.rotation.eulerAngles));
-            
-            if (!wood.GetComponent<Rigidbody>())
-            {
-                wood.AddComponent<Rigidbody>().linearDamping = woodDamping;
-            }
-        }
-
-        enabled = false;
-        GetComponent<Collider>().enabled = false;
-        Destroy(transform.parent.gameObject);
-    }
-
-    public string GetItemName()
-    {
-        return "Tree";
-    }
-
-    public (Sprite, string) HowInteract()
-    {
-        return (pickableTargetIcon, textTutorial);
-    }
-
-    public void Interact()
-    {
-        if (--hp > 0)
+        currenthealth -= damage;
+        if (currenthealth > 0)
         {
             AudioManager.Instance.PlayAudioClip("hit_tree");
             animator.Play("Hitted", 0, 0f);
         }
         else
         {
-            // AudioManager.Instance.PlayAudioClip("cracking");
-            // animator.SetTrigger("fall");
-            Dead();
+            Die();
         }
+    }
+
+    public override void Die()
+    {
+        AudioManager.Instance.StopSFXSound();
+        AudioManager.Instance.PlayAudioClip("cracking");
+        foreach (Transform transform in spawnPoints)
+        {
+            GameObject wood = ObjectPooler.ME.RequestObject("wood", transform.position, Quaternion.Euler(transform.rotation.eulerAngles));
+
+            if (!wood.GetComponent<Rigidbody>())
+            {
+                wood.AddComponent<Rigidbody>().linearDamping = objectSO.linearDamping;
+            }
+        }
+        
+        Destroy(transform.parent.gameObject);
     }
 }

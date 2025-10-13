@@ -15,7 +15,7 @@ public class Recoverable : MonoBehaviour, IInteractable
         return (pickableTargetIcon, textTutorial);
     }
 
-    public void Interact()
+    public void Affected(int damage)
     {
         ItemSO itemData = Resources.Load<ItemSO>($"_ItemSO/{gameObject.name}");
 

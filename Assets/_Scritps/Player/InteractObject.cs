@@ -68,7 +68,7 @@ public class InteractObject : MonoBehaviour
         if (focusingObject == null || !GameManager.Instance.CompareGameState("Playing")) return;
         
         if (focusingObject.TryGetComponent<PickableObject>(out var obj))
-            obj.Interact();
+            obj.Affected(0);
     }
 
     public void SetInteractionText(TMP_Text _TMP_Text)

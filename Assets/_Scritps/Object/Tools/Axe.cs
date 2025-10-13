@@ -41,7 +41,7 @@ public class Axe : MonoBehaviour, IEquipment
         if (InteractObject.focusingObject &&
             InteractObject.focusingObject.TryGetComponent<ChoppableObject>(out var choppableObject))
         {
-            choppableObject.Interact();
+            choppableObject.Affected(25);
         }
     }
 

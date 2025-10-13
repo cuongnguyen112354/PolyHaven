@@ -30,7 +30,7 @@ public class PickableObject : MonoBehaviour, IInteractable
         return (pickableTargetIcon, textTutorial);
     }
 
-    public void Interact()
+    public void Affected(int damage)
     {
         int itemQty = RandomQty();
 

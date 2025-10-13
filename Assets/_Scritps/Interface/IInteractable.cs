@@ -4,5 +4,5 @@ public interface IInteractable
 {
     (Sprite, string) HowInteract();
     string GetItemName();
-    void Interact();
+    void Affected(int damage = 0);
 }
