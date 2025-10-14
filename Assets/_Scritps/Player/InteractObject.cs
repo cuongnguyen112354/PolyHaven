@@ -6,13 +6,14 @@ public class InteractObject : MonoBehaviour
 {
     [HideInInspector] public static GameObject focusingObject;
 
+    [SerializeField] private float maxInteractionDistance = 1.75f;
+
+    [Header("Icons")]
     [SerializeField] private Image targetIcon;
     [SerializeField] private Sprite defalutTargetIcon;
 
     private int layerMask;
     private TMP_Text interactionInfo_Text;
-
-    const float MAX_INTERACTION_DISTANCE = 1.75f;
 
     private InputSystem_Actions inputActions;
 
@@ -43,7 +44,7 @@ public class InteractObject : MonoBehaviour
     void Update()
     {
         if (!GameManager.Instance.CompareGameState("Playing") ||
-            !Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, MAX_INTERACTION_DISTANCE, layerMask, QueryTriggerInteraction.Ignore) ||
+            !Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, maxInteractionDistance, layerMask, QueryTriggerInteraction.Ignore) ||
             hit.collider.gameObject.GetComponent<IInteractable>() == null)
         {
             focusingObject = null;

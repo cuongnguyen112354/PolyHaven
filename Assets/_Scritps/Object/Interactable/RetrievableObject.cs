@@ -18,8 +18,6 @@ public class RetrievableObject : MonoBehaviour, IInteractable
     {
         if (InventoryManager.Instance.IsAddItem(itemData))
         {
-            UIManager.Instance.ShowPickupNotify(1, itemData.itemName);
-
             ConstructionManager.Instance.RemovePlacedObject(itemData.itemName, gameObject);
 
             AudioManager.Instance.PlayAudioClip("pick_up");

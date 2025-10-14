@@ -33,7 +33,6 @@ public class PickableObject : MonoBehaviour, IInteractable
         // Logic for picking up the item
         if (InventoryManager.Instance.IsAddItem(itemData, itemQty))
         {
-            UIManager.Instance.ShowPickupNotify(itemQty, itemData.itemName);
             AudioManager.Instance.PlayAudioClip("pick_up");
 
             if (gameObject.GetComponent<Rigidbody>())

@@ -199,6 +199,8 @@ public class InventoryManager : MonoBehaviour
 
     public bool IsAddItem(ItemSO itemData, int quantity = 1)
     {
+        int qty = quantity;
+
         if (DicName.TryGetValue(itemData.itemName, out List<int> indices))
         {
             foreach (int index in indices)
@@ -211,7 +213,10 @@ public class InventoryManager : MonoBehaviour
                 inventorySlots[index].UpdateQuantityUI(DicSlot[index].quantity);
 
                 if (quantity <= 0)
+                {
+                    UIManager.Instance.ShowPickupNotify(qty, itemData.itemName);
                     return true;
+                }
             }
         }
 
@@ -232,7 +237,10 @@ public class InventoryManager : MonoBehaviour
                     DicName[itemData.itemName] = new List<int> { slotIndex };
 
                 if (result == 0)
+                {
+                    UIManager.Instance.ShowPickupNotify(qty, itemData.itemName);
                     return true;
+                }
 
                 (result, slotIndex) = ScanSlotToAdd(itemData, quantity);
             }
