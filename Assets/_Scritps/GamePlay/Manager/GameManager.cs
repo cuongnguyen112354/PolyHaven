@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        DataPersistence.Instance.LoadGameData();
+        DataManager.Instance.InitData();
 
         StartGame();
     }
@@ -255,9 +255,10 @@ public class GameManager : MonoBehaviour
     public void ExitGamePlay()
     {
         SetGameState(GameState.Loading);
-
         Time.timeScale = 1f;
-        DataPersistence.Instance.SaveGameData();
+
+        GameData gameData = DataManager.Instance.GetGameData();
+        DataPersistence.Instance.SaveGameData(gameData);
         GameController.Instance.SetSettingsData(Settings.Instance.GetSettingsData());
         
         StartCoroutine(FadeOut(() => ExitScene()));

@@ -61,20 +61,3 @@ public class Settings : MonoBehaviour
         };
     }
 }
-
-[System.Serializable]
-public class SettingsData
-{
-    public int lookSensitivity;
-    public int fpsDropdownValue;
-    public bool vSync;
-    public SoundData soundData;
-
-    public SettingsData()
-    {
-        lookSensitivity = 2;
-        fpsDropdownValue = 3;
-        vSync = true;
-        soundData = new SoundData();
-    }
-}

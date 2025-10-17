@@ -7,12 +7,6 @@ public class LoadAndLoadSettings
     // C:\Users\Chi Cuong\AppData\LocalLow\DefaultCompany\PolyHaven\settings.json
     private static string Path => Application.persistentDataPath + "/settings.json";
 
-    void Awake()
-    {
-        if (Instance == null)
-            Instance = this;
-    }
-
     public static void SaveSettingsData(SettingsData settingsData)
     {
         string json = JsonUtility.ToJson(settingsData, true);

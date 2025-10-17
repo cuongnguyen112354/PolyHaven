@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         CursorManager.Init();
-        settingsData = LoadAndLoadSettings.LoadSettingsData();
+        // DataPersistence.Instance.LoadGameData();
     }
 
     public SettingsData GetSettingsData()
@@ -48,7 +48,8 @@ public class GameController : MonoBehaviour
 
     public void ExitGame()
     {
-        LoadAndLoadSettings.SaveSettingsData(settingsData);
+        // DataPersistence.Instance.SaveGameData();
+        DataPersistence.Instance.SaveSettingsData();
         MyLibrary.ControlUtils.QuitGame();
     }
 }
