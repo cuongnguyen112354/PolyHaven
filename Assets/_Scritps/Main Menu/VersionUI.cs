@@ -17,7 +17,7 @@ public class VersionUI : MonoBehaviour
 
     public void ChooseGameData()
     {
-        DataPersistence.Instance.selectedVersion = data;
+        DataPersistence.Instance.SetVersionsSelected(data);
         DataPersistence.Instance.LoadGameData();
 
         MainMenu.Instance.InteractiveEnterBtn();

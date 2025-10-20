@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class DataHandler : MonoBehaviour
 {
-    private List<Versions> versions => DataPersistence.Instance.settingsData.versions;
+    private List<Versions> versions => DataPersistence.Instance.GetSettingsData().versions;
 
     public bool AddVersion(Versions version)
     {
@@ -91,7 +91,7 @@ public class DataHandler : MonoBehaviour
             // return null;
             return;
         }
-        Versions version = new($"data{index}", $"{DataPersistence.Instance.selectedVersion.nameVersion}");
+        Versions version = new($"data{index}", $"{DataPersistence.Instance.GetVersionsSelected().nameVersion}");
         version.lastModified = DateTime.Now;
         // return version;
         versions.Add(version);

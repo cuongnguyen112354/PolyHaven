@@ -5,8 +5,6 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance;
 
-    private SettingsData settingsData;
-
     void Awake()
     {
         if (Instance == null)
@@ -23,17 +21,6 @@ public class GameController : MonoBehaviour
     void Start()
     {
         CursorManager.Init();
-        // DataPersistence.Instance.LoadGameData();
-    }
-
-    public SettingsData GetSettingsData()
-    {
-        return settingsData;
-    }
-
-    public void SetSettingsData(SettingsData data)
-    {
-        settingsData = data;
     }
 
     public void MainMenuScene()
@@ -48,7 +35,6 @@ public class GameController : MonoBehaviour
 
     public void ExitGame()
     {
-        // DataPersistence.Instance.SaveGameData();
         DataPersistence.Instance.SaveSettingsData();
         MyLibrary.ControlUtils.QuitGame();
     }

@@ -19,13 +19,15 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
-        DataPersistence.Instance.LoadSettingsData();
+        if (!DataPersistence.Instance.isLoaded)
+            DataPersistence.Instance.LoadSettingsData();
+
         SetVersionUIs();
     }
 
     private void SetVersionUIs()
     {
-        List<Versions> versions = DataPersistence.Instance.settingsData.versions;
+        List<Versions> versions = DataPersistence.Instance.GetSettingsData().versions;
 
         if (versionUIs.Count > versions.Count)
             createVersionBtn.gameObject.SetActive(true);

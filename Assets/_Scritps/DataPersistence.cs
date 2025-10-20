@@ -6,12 +6,14 @@ using System.Collections.Generic;
 public class DataPersistence : MonoBehaviour
 {
     public static DataPersistence Instance;
-    [HideInInspector] public SettingsData settingsData;
-    [HideInInspector] public GameData gameData;
-
-    public Versions selectedVersion;
+    public bool isLoaded = false;
 
     [SerializeField] private InitDataSO initDataSO;
+
+    private SettingsData settingsData;
+    private GameData gameData;
+
+    private Versions selectedVersion;
 
     // C:\Users\Chi Cuong\AppData\LocalLow\DefaultCompany\PolyHaven
     private string PathS => Application.persistentDataPath + "/settings.json";
@@ -20,6 +22,8 @@ public class DataPersistence : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
+
+        isLoaded = false;
     }
 
     private string GetGameDataSelectedPath()
@@ -33,6 +37,37 @@ public class DataPersistence : MonoBehaviour
         gameData = null;
     }
 
+    public SettingsData GetSettingsData()
+    {
+        return settingsData;
+    }
+
+    public void SetSettingsData(SettingsData data)
+    {
+        data.versions = settingsData.versions;
+        settingsData = data;
+    }
+
+    public GameData GetGameData()
+    {
+        return gameData;
+    }
+
+    public void SetGameData(GameData data)
+    {
+        gameData = data;
+    }
+
+    public Versions GetVersionsSelected()
+    {
+        return selectedVersion;
+    }
+
+    public void SetVersionsSelected(Versions version)
+    {
+        selectedVersion = version;
+    }
+
     public void LoadSettingsData()
     {
         if (File.Exists(PathS))
@@ -44,6 +79,8 @@ public class DataPersistence : MonoBehaviour
         {
             settingsData = new SettingsData();
         }
+
+        isLoaded = true;
     }
 
     public void SaveSettingsData()

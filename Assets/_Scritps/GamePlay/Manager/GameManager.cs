@@ -258,8 +258,10 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
 
         GameData gameData = DataManager.Instance.GetGameData();
+        SettingsData settingsData = Settings.Instance.GetSettingsData();
+
         DataPersistence.Instance.SaveGameData(gameData);
-        GameController.Instance.SetSettingsData(Settings.Instance.GetSettingsData());
+        DataPersistence.Instance.SetSettingsData(settingsData);
         
         StartCoroutine(FadeOut(() => ExitScene()));
     }

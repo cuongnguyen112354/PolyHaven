@@ -43,14 +43,16 @@ public class DataManager : MonoBehaviour
 
     public void InitData()
     {
-        if (data.gameData.playerData != null)
-            PlayerHealth.Instance.Init(data.gameData.playerData);
-        if (data.gameData.inventoryData != null)
-            InventoryManager.Instance.Init(data.gameData.inventoryData);
-        if (data.gameData.constructionData != null)
-            ConstructionManager.Instance.Init(data.gameData.constructionData);
+        GameData gameData = data.GetGameData();
+
+        if (gameData.playerData != null)
+            PlayerHealth.Instance.Init(gameData.playerData);
+        if (gameData.inventoryData != null)
+            InventoryManager.Instance.Init(gameData.inventoryData);
+        if (gameData.constructionData != null)
+            ConstructionManager.Instance.Init(gameData.constructionData);
         
         if (data)
-            Settings.Instance.Init(data.settingsData);
+            Settings.Instance.Init(data.GetSettingsData());
     }
 }
