@@ -157,16 +157,19 @@ public class GameData
 {
     public PlayerData playerData;
     public List<SlotData> inventoryData;
-    public List<ObjectData> constructionData;
+    public List<EnvironmentObject> environmentData;
+    public List<ConstructionObject> constructionData;
 
     public GameData(
         PlayerData playerData,
         List<SlotData> inventoryData,
-        List<ObjectData> constructionData
+        List<EnvironmentObject> environmentData,
+        List<ConstructionObject> constructionData
     )
     {
         this.playerData = playerData;
         this.inventoryData = inventoryData;
+        this.environmentData = environmentData;
         this.constructionData = constructionData;
     }
 
@@ -174,6 +177,7 @@ public class GameData
     {
         playerData = initDataSO.playerData;
         inventoryData = initDataSO.inventoryData;
+        environmentData = initDataSO.environmentData;
         constructionData = initDataSO.constructionData;
     }
 }

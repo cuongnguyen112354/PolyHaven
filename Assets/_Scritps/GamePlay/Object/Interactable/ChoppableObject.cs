@@ -21,6 +21,9 @@ public class ChoppableObject : AbObjectLife
     {
         AudioManager.Instance.StopSFXSound();
         AudioManager.Instance.PlayAudioClip("cracking");
+
+        EnvironmentManager.Instance.RemoveObject(objectSO.objectName, transform.parent.gameObject);
+
         foreach (Transform transform in spawnPoints)
         {
             GameObject wood = ObjectPooler.ME.RequestObject("wood", transform.position, Quaternion.Euler(transform.rotation.eulerAngles));
@@ -31,6 +34,6 @@ public class ChoppableObject : AbObjectLife
             }
         }
         
-        Destroy(transform.parent.gameObject);
+        // Destroy(transform.parent.gameObject);
     }
 }

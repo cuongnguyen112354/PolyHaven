@@ -12,24 +12,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbbe98327b297db479b496ef353f2960, type: 3}
   m_Name: InitDataSO
   m_EditorClassIdentifier: 
-  settingsData:
-    lookSensitivity: 2
-    fpsDropdownValue: 3
-    vSync: 1
-    soundData:
-      musicVolume: 0.8
-      musicIsMute: 0
-      SFXVolume: 0.8
-      SFXIsMute: 0
   playerData:
     maxHunger: 100
     maxRest: 100
-    hunger: 100
-    rest: 100
-    position: {x: 20, y: 3, z: 0}
-    rotation: {x: 0, y: -90, z: 0}
+    hunger: 95
+    rest: 97
+    position: {x: 6.234703, y: 2.1743145, z: -7.7576275}
+    rotation: {x: 0, y: 258.70007, z: 0}
   inventoryData: []
+  environmentData:
+  - objectName: Rock
+    position: {x: -13.806717, y: 1.2829847, z: -62.781418}
+  - objectName: Rock
+    position: {x: -28.420612, y: 1.2829771, z: -66.24788}
+  - objectName: Rock
+    position: {x: -24.051044, y: 1.2829828, z: -51.412964}
+  - objectName: Rock
+    position: {x: -48.014343, y: 1.2829771, z: -60.001144}
+  - objectName: Tree
+    position: {x: 33.072765, y: 1.9110662, z: -26.693424}
+  - objectName: Tree
+    position: {x: -5.1495476, y: 1.3783778, z: -40.7747}
+  - objectName: Tree
+    position: {x: -11.829708, y: 1.3783778, z: -76.89946}
+  - objectName: Tree
+    position: {x: -46.25077, y: 1.3783816, z: -78.577446}
+  - objectName: Tree
+    position: {x: -55.522804, y: 1.3783778, z: -60.564003}
+  - objectName: Tree
+    position: {x: -23.06105, y: 1.3783816, z: -59.475166}
+  - objectName: Tree
+    position: {x: 20.73507, y: 1.3783778, z: -51.82012}
   constructionData:
-  - itemName: Campfire
+  - objectName: Campfire
     position: {x: -76.700005, y: 1.2160568, z: -63.600002}
     rotation: {x: 0, y: 0, z: 0, w: 0}

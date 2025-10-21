@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,49 +41,44 @@ public class ConstructionManager : MonoBehaviour
         placedObjects[itemName].Add(obj);
     }
 
-    public void Init(List<ObjectData> objectDatas)
+    public void Init(List<ConstructionObject> constructionObjects)
     {
-        foreach (ObjectData data in objectDatas)
+        foreach (ConstructionObject data in constructionObjects)
         {
-            AddPlacedObject(data.itemName, data.position, data.rotation);
+            AddPlacedObject(data.objectName, data.position, data.rotation);
         }
     }
 
-    public List<ObjectData> GetConstructionData()
+    public List<ConstructionObject> GetConstructionObject()
     {
-        List<ObjectData> objectDatas = new();
+        List<ConstructionObject> constructionObjects = new();
         foreach (var kvp in placedObjects)
         {
-            string itemName = kvp.Key;
+            string objectName = kvp.Key;
             foreach (var obj in kvp.Value)
             {
-                objectDatas.Add(new ObjectData
+                constructionObjects.Add(new ConstructionObject
                 {
-                    itemName = itemName,
+                    objectName = objectName,
                     position = obj.transform.position,
                     rotation = obj.transform.rotation
                 });
             }
         }
-        return objectDatas;
-    }
-
-    internal void Init(object v)
-    {
-        throw new NotImplementedException();
+        return constructionObjects;
     }
 }
 
 [System.Serializable]
-public class ObjectData
+public class ConstructionObject
 {
-    public string itemName;
+    public string objectName;
     public Vector3 position;
     public Quaternion rotation;
 
-    public ObjectData()
+    public ConstructionObject()
     {
-        itemName = "Campfire";
+        objectName = "Campfire";
         position = new Vector3( (float) -76.5999984741211, (float) 1.2160568237304688, (float) -63.5);
         rotation = new Quaternion(0, 0, 0, 1);
     }

@@ -7,5 +7,6 @@ public class InitDataSO : ScriptableObject
     // public SettingsData settingsData;
     public PlayerData playerData;
     public List<SlotData> inventoryData;
-    public List<ObjectData> constructionData;
+    public List<EnvironmentObject> environmentData;
+    public List<ConstructionObject> constructionData;
 }

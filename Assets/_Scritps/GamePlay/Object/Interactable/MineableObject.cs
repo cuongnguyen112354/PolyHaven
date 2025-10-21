@@ -21,6 +21,9 @@ public class MineableObject : AbObjectLife
     {
         AudioManager.Instance.StopSFXSound();
         AudioManager.Instance.PlayAudioClip("rock-destroy");
+
+        EnvironmentManager.Instance.RemoveObject(objectSO.objectName, gameObject);
+
         foreach (Transform transform in spawnPoints)
         {
             GameObject wood = ObjectPooler.ME.RequestObject("stone", transform.position, Quaternion.Euler(transform.rotation.eulerAngles));
@@ -31,6 +34,6 @@ public class MineableObject : AbObjectLife
             }
         }
 
-        Destroy(gameObject);
+        // Destroy(gameObject);
     }
 }
