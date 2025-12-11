@@ -124,9 +124,9 @@ public class CraftingManager : MonoBehaviour
 
     public void CraftItemResult()
     {
-        if (InventoryManager.Instance.IsAddItem(recipeSelecting.result))
+        if (Inventory.Instance.IsAddItem(recipeSelecting.result))
         {
-            InventoryManager.Instance.RemoveItems(recipeSelecting.result.ingredients);
+            Inventory.Instance.RemoveItems(recipeSelecting.result.ingredients);
             ResetUI();
         }
     }

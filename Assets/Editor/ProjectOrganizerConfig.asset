@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 435a0ba63ececa846911ebca30581229, type: 3}
+  m_Name: ProjectOrganizerConfig
+  m_EditorClassIdentifier: 
+  ExtensionMappings:
+  - Extension: .cs
+    TargetFolder: Assets/_Scripts
+  - Extension: .prefab
+    TargetFolder: Assets/_Prefabs/Props
+  - Extension: .unity
+    TargetFolder: Assets/Scenes/Levels
+  - Extension: .png
+    TargetFolder: Assets/Art/Textures
+  - Extension: .jpg
+    TargetFolder: Assets/Art/Textures
+  - Extension: .jpeg
+    TargetFolder: Assets/Art/Textures
+  - Extension: .tga
+    TargetFolder: Assets/Art/Textures
+  - Extension: .psd
+    TargetFolder: Assets/Art/Textures
+  - Extension: .gif
+    TargetFolder: Assets/Art/Textures
+  - Extension: .mp3
+    TargetFolder: Assets/Audio/SFX
+  - Extension: .wav
+    TargetFolder: Assets/Audio/SFX
+  - Extension: .ogg
+    TargetFolder: Assets/Audio/SFX
+  - Extension: .aiff
+    TargetFolder: Assets/Audio/SFX
+  - Extension: .ttf
+    TargetFolder: Assets/UI/Fonts
+  - Extension: .mov
+    TargetFolder: Assets/Resources
+  IncludeFolders:
+  - Assets
+  ExcludeFolders:
+  - Assets/ProjectSettings
+  - Assets/Packages
+  - Assets/Library
+  - Assets/Logs
+  - Assets/obj
+  - Assets/.git
+  - Assets/.vs
+  - Assets/Temp
+  - Assets/UserSettings
+  - Assets/TextMesh Pro
+  - Assets/TMP
+  - Assets/ExternalAssets
+  - Assets/Plugins
+  - Assets/StreamingAssets
+  - Assets/Gizmos
+  - Assets/Editor Default Resources
+  - Assets/Standard Assets
+  ExtensionsToScan: .cs,.shader,.prefab,.unity,.mat,.png,.jpg,.jpeg,.tga,.psd,.gif,.mp3,.wav,.ogg,.aiff,.flac,.ttf,.otf,.mp4,.avi,.mov,.asset
+  TemplateFolders:
+  - Art/Sprites
+  - Art/Textures
+  - Art/Animations
+  - Art/Characters
+  - Art/Environment
+  - Art/UI
+  - Audio/Music
+  - Audio/SFX
+  - Audio/Voices
+  - Materials/Characters
+  - Materials/Environment
+  - Prefabs/Characters
+  - Prefabs/Enemies
+  - Prefabs/Environment
+  - Prefabs/Props
+  - Prefabs/UI
+  - Scenes/Main
+  - Scenes/Levels
+  - Scenes/UI
+  - Scripts/Core
+  - Scripts/Managers
+  - Scripts/Gameplay
+  - Scripts/Player
+  - Scripts/Enemies
+  - Scripts/UI
+  - Scripts/Utils
+  - Shaders
+  - UI/Images
+  - UI/Fonts
+  - UI/Prefabs
+  - Plugins
+  - Resources
+  - Editor
+  - StreamingAssets
+  - Video
+  - Misc

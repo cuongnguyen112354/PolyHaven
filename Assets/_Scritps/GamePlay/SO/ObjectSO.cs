@@ -11,4 +11,7 @@ public class ObjectSO : ScriptableObject
     [Header("How to Interact")]
     public Sprite targetIcon;
     public string textTutorial;
+
+    [Header("Nguyên Liệu rơi ra")]
+    public MaterialSO materialSO;
 }

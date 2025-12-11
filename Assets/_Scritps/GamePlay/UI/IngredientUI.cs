@@ -20,7 +20,7 @@ public class IngredientUI : MonoBehaviour
 
         iconItem.sprite = ingredient.item.icon;
 
-        (bool result, int missingQuantity) = InventoryManager.Instance.HasItem(ingredient);
+        (bool result, int missingQuantity) = Inventory.Instance.HasItem(ingredient);
         if (result)
         {
             canvasGroup.alpha = 1;

@@ -1,6 +1,6 @@
-using UnityEngine;
 using System;
 using System.IO;
+using UnityEngine;
 using System.Collections.Generic;
 
 public class DataPersistence : MonoBehaviour
@@ -149,35 +149,5 @@ public class Versions
         nameFile = fileName;
         nameVersion = versionName;
         lastModified = DateTime.Now;
-    }
-}
-
-[Serializable]
-public class GameData
-{
-    public PlayerData playerData;
-    public List<SlotData> inventoryData;
-    public List<EnvironmentObject> environmentData;
-    public List<ConstructionObject> constructionData;
-
-    public GameData(
-        PlayerData playerData,
-        List<SlotData> inventoryData,
-        List<EnvironmentObject> environmentData,
-        List<ConstructionObject> constructionData
-    )
-    {
-        this.playerData = playerData;
-        this.inventoryData = inventoryData;
-        this.environmentData = environmentData;
-        this.constructionData = constructionData;
-    }
-
-    public GameData(InitDataSO initDataSO)
-    {
-        playerData = initDataSO.playerData;
-        inventoryData = initDataSO.inventoryData;
-        environmentData = initDataSO.environmentData;
-        constructionData = initDataSO.constructionData;
     }
 }

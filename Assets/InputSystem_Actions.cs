@@ -93,9 +93,18 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             ""id"": ""df70fa95-8a34-4494-b137-73ab6b9c7d37"",
             ""actions"": [
                 {
-                    ""name"": ""Pickup"",
+                    ""name"": ""MainInteract"",
                     ""type"": ""Button"",
                     ""id"": ""852140f2-7766-474d-8707-702459ba45f3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Retrive"",
+                    ""type"": ""Button"",
+                    ""id"": ""c7358890-50f0-49d9-afa7-e3362543e6fe"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -110,7 +119,18 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Pickup"",
+                    ""action"": ""MainInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""81f2ff3c-a538-4006-b671-4d3d1df16dcd"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Retrive"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -866,7 +886,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_Pickup = m_Player.FindAction("Pickup", throwIfNotFound: true);
+        m_Player_MainInteract = m_Player.FindAction("MainInteract", throwIfNotFound: true);
+        m_Player_Retrive = m_Player.FindAction("Retrive", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -971,7 +992,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_Pickup;
+    private readonly InputAction m_Player_MainInteract;
+    private readonly InputAction m_Player_Retrive;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -984,9 +1006,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// </summary>
         public PlayerActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Player/Pickup".
+        /// Provides access to the underlying input action "Player/MainInteract".
         /// </summary>
-        public InputAction @Pickup => m_Wrapper.m_Player_Pickup;
+        public InputAction @MainInteract => m_Wrapper.m_Player_MainInteract;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Retrive".
+        /// </summary>
+        public InputAction @Retrive => m_Wrapper.m_Player_Retrive;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1013,9 +1039,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-            @Pickup.started += instance.OnPickup;
-            @Pickup.performed += instance.OnPickup;
-            @Pickup.canceled += instance.OnPickup;
+            @MainInteract.started += instance.OnMainInteract;
+            @MainInteract.performed += instance.OnMainInteract;
+            @MainInteract.canceled += instance.OnMainInteract;
+            @Retrive.started += instance.OnRetrive;
+            @Retrive.performed += instance.OnRetrive;
+            @Retrive.canceled += instance.OnRetrive;
         }
 
         /// <summary>
@@ -1027,9 +1056,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="PlayerActions" />
         private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @Pickup.started -= instance.OnPickup;
-            @Pickup.performed -= instance.OnPickup;
-            @Pickup.canceled -= instance.OnPickup;
+            @MainInteract.started -= instance.OnMainInteract;
+            @MainInteract.performed -= instance.OnMainInteract;
+            @MainInteract.canceled -= instance.OnMainInteract;
+            @Retrive.started -= instance.OnRetrive;
+            @Retrive.performed -= instance.OnRetrive;
+            @Retrive.canceled -= instance.OnRetrive;
         }
 
         /// <summary>
@@ -1504,12 +1536,19 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         /// <summary>
-        /// Method invoked when associated input action "Pickup" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "MainInteract" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnPickup(InputAction.CallbackContext context);
+        void OnMainInteract(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Retrive" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRetrive(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

@@ -24,5 +24,5 @@ public abstract class ItemSO : ScriptableObject
 public enum TypeTextTutorial
 {
     Pickup,
-    Retrieve
+    Interact
 }

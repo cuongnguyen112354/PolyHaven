@@ -38,7 +38,7 @@ public class Food : MonoBehaviour, IEquipment
 
     private void ConsumeEvent()
     {
-        InventoryManager.Instance.UseSelectingItem();
+        HotBar.Instance.UseSelectingItem();
     }
 
     private void DoneUsingEvent()
@@ -50,7 +50,7 @@ public class Food : MonoBehaviour, IEquipment
     {
         if (GameManager.Instance.CompareGameState("Playing"))
         {
-            if (usingBtnDown && !isUsing && InventoryManager.Instance.CheckSelectingItemQuantity())
+            if (usingBtnDown && !isUsing && HotBar.Instance.CheckSelectingItemQuantity())
             {
                 isUsing = true;
 

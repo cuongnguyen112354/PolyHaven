@@ -8,10 +8,11 @@ public class Trash : MonoBehaviour, IDropHandler
         GameObject dropped = eventData.pointerDrag;
         DraggableItem draggableItem = dropped.GetComponent<DraggableItem>();
 
-        int slotIndex = draggableItem.parentAfterDrag.GetComponent<InventorySlot>().slotIndex;
-        InventoryManager.Instance.TrashSlotItem(slotIndex);
+        InventorySlot pickSlot = draggableItem.parentAfterDrag.GetComponent<InventorySlot>();
+        Storage dropStorage = StorageCodeMap.GetComponentByCode(pickSlot.storageCode);
+        dropStorage.TrashSlotItem(pickSlot.slotIndex);
 
         Destroy(dropped);
-        InventoryManager.Instance.onDragging = false;
+        PlayerController.Instance.onDragging = false;
     }
 }

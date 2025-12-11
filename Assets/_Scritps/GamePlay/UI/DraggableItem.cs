@@ -30,7 +30,7 @@ public class DraggableItem : MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
         image.raycastTarget = false;
 
         AudioManager.Instance.PlayAudioClip("put_up");
-        InventoryManager.Instance.onDragging = true;
+        PlayerController.Instance.onDragging = true;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -46,6 +46,6 @@ public class DraggableItem : MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
         image.raycastTarget = true;
 
         AudioManager.Instance.PlayAudioClip("put_down");
-        InventoryManager.Instance.onDragging = false;
+        PlayerController.Instance.onDragging = false;
     }
 }

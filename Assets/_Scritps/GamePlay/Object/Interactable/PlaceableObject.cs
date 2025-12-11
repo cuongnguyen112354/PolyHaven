@@ -108,8 +108,11 @@ public class PlaceableObject : MonoBehaviour
         // foreach (MonoBehaviour script in scripts)
         //     script.enabled = true;
 
-        InventoryManager.Instance.RemoveItem(gameObject.name);
-        ConstructionManager.Instance.AddPlacedObject(gameObject.name, transform.position, transform.rotation);
+        HotBar.Instance.RemoveItem(gameObject.name);
+        GameObject obj = ConstructionManager.Instance.AddPlacedObject(gameObject.name, transform.position, transform.rotation);
+        
+        if (obj.name == "Chest")
+            obj.GetComponent<Chest>().storageCode = ChestManager.Instance.GenerateChestCode();
 
         Destroy(gameObject);
     }

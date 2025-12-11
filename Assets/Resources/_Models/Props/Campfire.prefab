@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4079462217436813459}
   - component: {fileID: 1397498781001698344}
   - component: {fileID: 9125154416311891615}
-  - component: {fileID: 344050595164002317}
   - component: {fileID: 7150054751852225948}
+  - component: {fileID: 344050595164002317}
   - component: {fileID: 4525971814103470022}
   m_Layer: 3
   m_Name: Campfire
@@ -89,6 +89,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7150054751852225948
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8171578419124390562}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 312d8d06484a8984088348d1af5df24d, type: 3}
 --- !u!54 &344050595164002317
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -116,28 +138,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!64 &7150054751852225948
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8171578419124390562}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 312d8d06484a8984088348d1af5df24d, type: 3}
 --- !u!114 &4525971814103470022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,6 +151,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceToPlace: 10
-  gameObjects:
-  - {fileID: 0}
-  scripts: []
+  gridSize: 0.1

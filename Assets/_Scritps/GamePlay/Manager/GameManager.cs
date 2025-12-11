@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject darkBg;
     [SerializeField] GameObject inventoryPanel;
+    [SerializeField] GameObject chestPanel;
     [SerializeField] GameObject selectionPanel;
 
     [SerializeField] Animator fadeAnimator;
@@ -67,6 +68,11 @@ public class GameManager : MonoBehaviour
             frameCount = 0;
             elapsedTime = 0f;
         }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            StorageCodeMap.LogAllCode();
+        }
     }
 
     void OnEnable()
@@ -85,6 +91,8 @@ public class GameManager : MonoBehaviour
         inputActions.UI.Escape.performed -= ctx => OnPause();
 
         inputActions.Disable();
+
+        StorageCodeMap.codeMap.Clear();
     }
 
     private void OnInventory()
@@ -124,6 +132,14 @@ public class GameManager : MonoBehaviour
 
     void PlayingState()
     {
+        if (chestPanel.activeSelf)
+        {
+            Storage chest = StorageCodeMap.GetComponentByCode(ChestManager.Instance.currentChestCode);
+            if (chest is Chest chestObj)
+                chestObj.Affected();
+            chestPanel.SetActive(false);
+        }
+
         darkBg.SetActive(false);
         inventoryPanel.SetActive(false);
         selectionPanel.SetActive(false);
@@ -213,6 +229,11 @@ public class GameManager : MonoBehaviour
     {
         if (panelName == "Inventory")
             inventoryPanel.SetActive(true);
+        else if (panelName == "Chest")
+        {
+            chestPanel.SetActive(true);
+            inventoryPanel.SetActive(true);
+        }
         else if (panelName == "Crafting")
             selectionPanel.SetActive(true);
 
@@ -228,6 +249,9 @@ public class GameManager : MonoBehaviour
 
         if (inventoryPanel.activeSelf)
             inventoryPanel.SetActive(false);
+
+        if (chestPanel.activeSelf)
+            chestPanel.SetActive(false);
 
         if (selectionPanel.activeSelf)
             selectionPanel.SetActive(false);

@@ -28,3 +28,6 @@ MonoBehaviour:
     interaction: {fileID: 21300000, guid: 4d79d2f4f1e764a41853aa24d11ad665, type: 3}
   - description: Rotation
     interaction: {fileID: 21300000, guid: 4717014b8c9d01b4b9b0eae093b40360, type: 3}
+  subInteractSteps:
+  - description: Retrive
+    interaction: {fileID: 21300000, guid: 4717014b8c9d01b4b9b0eae093b40360, type: 3}

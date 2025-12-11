@@ -26,7 +26,7 @@ public class ChoppableObject : AbObjectLife
 
         foreach (Transform transform in spawnPoints)
         {
-            GameObject wood = ObjectPooler.ME.RequestObject("wood", transform.position, Quaternion.Euler(transform.rotation.eulerAngles));
+            GameObject wood = ObjectPooler.ME.RequestObject(objectSO.materialSO.itemName, transform.position, Quaternion.Euler(transform.rotation.eulerAngles));
 
             if (!wood.GetComponent<Rigidbody>())
             {

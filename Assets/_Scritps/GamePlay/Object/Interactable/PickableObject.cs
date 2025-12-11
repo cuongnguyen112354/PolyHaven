@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PickableObject : MonoBehaviour, IInteractable
 {
+    public int quantity = 0;
+
     [SerializeField] private ItemSO itemData;
 
     // Randomly determine the quantity of items to pick up based on defined probabilities
@@ -26,12 +28,13 @@ public class PickableObject : MonoBehaviour, IInteractable
         return (itemData.targetIcon, itemData.textTutorial);
     }
 
-    public void Affected(int damage)
+    public void Affected(int damage = 0)
     {
-        int itemQty = RandomQty();
+        if (quantity == 0)
+            quantity = RandomQty();
 
         // Logic for picking up the item
-        if (InventoryManager.Instance.IsAddItem(itemData, itemQty))
+        if (Inventory.Instance.IsAddItem(itemData, quantity))
         {
             AudioManager.Instance.PlayAudioClip("pick_up");
 

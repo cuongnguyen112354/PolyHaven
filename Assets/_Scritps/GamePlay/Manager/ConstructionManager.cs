@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Mono.Cecil.Cil;
 using UnityEngine;
 
 public class ConstructionManager : MonoBehaviour
@@ -26,7 +27,7 @@ public class ConstructionManager : MonoBehaviour
         }
     }
 
-    public void AddPlacedObject(string itemName, Vector3 position, Quaternion rotation)
+    public GameObject AddPlacedObject(string itemName, Vector3 position, Quaternion rotation)
     {
         if (!placedObjects.ContainsKey(itemName))
             placedObjects[itemName] = new List<GameObject>();
@@ -34,12 +35,36 @@ public class ConstructionManager : MonoBehaviour
         GameObject prefab = Resources.Load<GameObject>($"_Models/Retrievables/{itemName}");
         GameObject obj = Instantiate(prefab);
 
+        // if (itemName == "Chest" & obj.TryGetComponent<Chest>(out var chest))
+        // {
+        //     chest.storageCode = ChestManager.Instance.GenerateChestCode();
+        // }
+
         obj.name = itemName;
         obj.transform.SetPositionAndRotation(position, rotation);
         obj.transform.SetParent(transform);
 
         placedObjects[itemName].Add(obj);
+
+        return obj;
     }
+
+    // public GameObject AddChest(Vector3 position, Quaternion rotation)
+    // {
+    //     if (!placedObjects.ContainsKey("Chest"))
+    //         placedObjects["Chest"] = new List<GameObject>();
+
+    //     GameObject prefab = Resources.Load<GameObject>("_Models/Retrievables/Chest");
+    //     GameObject chestObj = Instantiate(prefab);
+
+    //     chestObj.name = "Chest";
+    //     chestObj.transform.SetPositionAndRotation(position, rotation);
+    //     chestObj.transform.SetParent(transform);
+
+    //     placedObjects["Chest"].Add(chestObj);
+
+    //     return chestObj;
+    // }
 
     public void Init(List<ConstructionObject> constructionObjects)
     {
@@ -54,12 +79,13 @@ public class ConstructionManager : MonoBehaviour
         List<ConstructionObject> constructionObjects = new();
         foreach (var kvp in placedObjects)
         {
-            string objectName = kvp.Key;
             foreach (var obj in kvp.Value)
             {
+                if (kvp.Key == "Chest") continue;
+
                 constructionObjects.Add(new ConstructionObject
                 {
-                    objectName = objectName,
+                    objectName = kvp.Key,
                     position = obj.transform.position,
                     rotation = obj.transform.rotation
                 });

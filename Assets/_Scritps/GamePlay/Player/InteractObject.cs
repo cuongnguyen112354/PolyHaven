@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Cysharp.Threading.Tasks;
 
 public class InteractObject : MonoBehaviour
 {
@@ -26,12 +27,14 @@ public class InteractObject : MonoBehaviour
     {
         inputActions.Enable();
 
-        inputActions.Player.Pickup.performed += _ => Pickup();
+        inputActions.Player.MainInteract.performed += _ => MainInteract();
+        inputActions.Player.Retrive.performed += _ => Retrive().Forget();
     }
 
     void OnDisable()
     {
-        inputActions.Player.Pickup.performed -= _ => Pickup();
+        inputActions.Player.MainInteract.performed -= _ => MainInteract();
+        inputActions.Player.Retrive.performed -= _ => Retrive().Forget();
 
         inputActions.Disable();
     }
@@ -45,8 +48,14 @@ public class InteractObject : MonoBehaviour
     {
         if (!GameManager.Instance.CompareGameState("Playing") ||
             !Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, maxInteractionDistance, layerMask, QueryTriggerInteraction.Ignore) ||
-            hit.collider.gameObject.GetComponent<IInteractable>() == null)
+            (hit.collider.gameObject.GetComponent<IInteractable>() == null & hit.collider.gameObject.GetComponent<ISubInteractable>() == null))
         {
+            if (focusingObject)
+            {
+                if (focusingObject.GetComponent<ISubInteractable>() != null)
+                    TutorialManager.Instance.HideAllTutorials();
+            }
+
             focusingObject = null;
             
             interactionInfo_Text.gameObject.SetActive(false);
@@ -59,20 +68,50 @@ public class InteractObject : MonoBehaviour
 
         focusingObject = hit.collider.gameObject;
 
-        (targetIcon.sprite, interactionInfo_Text.text) = focusingObject.GetComponent<IInteractable>().HowInteract();
-        targetIcon.SetNativeSize();
-        interactionInfo_Text.gameObject.SetActive(true);
+        if (focusingObject.TryGetComponent<IInteractable>(out var item))
+        {
+            (targetIcon.sprite, interactionInfo_Text.text) = item.HowInteract();
+            targetIcon.SetNativeSize();
+            interactionInfo_Text.gameObject.SetActive(true);
+        }
+
+        if (focusingObject.TryGetComponent<DestroyableObject>(out var prop))
+        {
+            prop.HowInteract();
+        }
     }
 
-    private void Pickup()
+    private void MainInteract()
     {
         if (focusingObject == null || !GameManager.Instance.CompareGameState("Playing")) return;
 
         if (focusingObject.TryGetComponent<PickableObject>(out var item))
-            item.Affected(0);
-        else if (focusingObject.TryGetComponent<RetrievableObject>(out var prop))
-            prop.Affected(0);
+            item.Affected();
+        else if (focusingObject.TryGetComponent<Chest>(out var chest))
+            chest.Affected();
     }
+
+    // private void Retrive()
+    // {
+    //     if (focusingObject == null || !GameManager.Instance.CompareGameState("Playing")) return;
+
+    //     if (focusingObject.TryGetComponent<RetrievableObject>(out var prop))
+    //         prop.Interact();
+    // }
+
+    private async UniTaskVoid Retrive()
+    {
+        if (focusingObject == null || !GameManager.Instance.CompareGameState("Playing")) return;
+
+        if (focusingObject.TryGetComponent<DestroyableObject>(out var prop))
+        {
+            prop.Destroy().Forget();
+            
+            await UniTask.WaitForEndOfFrame();
+            TutorialManager.Instance.HideAllTutorials();
+        }
+    }
+
 
     public void SetInteractionText(TMP_Text _TMP_Text)
     {

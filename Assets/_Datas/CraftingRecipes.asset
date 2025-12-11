@@ -22,6 +22,10 @@ MonoBehaviour:
     resultAmount: 1
   - result: {fileID: 11400000, guid: f7d2248ba5fab9a45b7969d7ed397108, type: 2}
     resultAmount: 1
+  - result: {fileID: 11400000, guid: 22f7b5aea2b0cef40bf1c4b9a08085e0, type: 2}
+    resultAmount: 1
+  - result: {fileID: 11400000, guid: 95d890abfb861a34f930dd9d782c3d3f, type: 2}
+    resultAmount: 1
   houseRecipes:
   - result: {fileID: 11400000, guid: 57bde02981ec27644922b2f65d19985e, type: 2}
     resultAmount: 1

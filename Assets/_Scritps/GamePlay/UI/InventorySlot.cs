@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 public class InventorySlot : MonoBehaviour, IDropHandler
 {
     [HideInInspector] public int slotIndex;
+    [HideInInspector] public string storageCode;
 
     [SerializeField] private GameObject itemPrefab;
     [SerializeField] private TMP_Text quantityText;
@@ -14,9 +15,10 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         if (quantity == 0)
             quantityText.gameObject.SetActive(false);
         else
+        {
             quantityText.gameObject.SetActive(true);
-
-        UpdateQuantityUI(quantity);
+            UpdateQuantityUI(quantity);
+        }
     }
 
     public void UpdateQuantityUI(int quantity)
@@ -49,7 +51,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         GameObject dropped = eventData.pointerDrag;
         DraggableItem draggableItem = dropped.GetComponent<DraggableItem>();
 
-        int firstSlot = draggableItem.parentAfterDrag.GetComponent<InventorySlot>().slotIndex;
+        InventorySlot pickSlot = draggableItem.parentAfterDrag.GetComponent<InventorySlot>();
         bool basic = true;
 
         if (transform.childCount != 1)
@@ -63,6 +65,33 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 
         draggableItem.parentAfterDrag = transform;
 
-        InventoryManager.Instance.SwapSlotItem(firstSlot, slotIndex, basic);
+        Storage dropStorage = StorageCodeMap.GetComponentByCode(storageCode);
+        // Trường hợp cùng một Storage
+        if (storageCode == pickSlot.storageCode)
+        {
+            dropStorage.SwapSlotItem(pickSlot.slotIndex, slotIndex, basic);
+        }
+        // Trường hợp khác Storage
+        else if (basic)
+        {
+            Storage pickStorage = StorageCodeMap.GetComponentByCode(pickSlot.storageCode);
+            (ItemSO, int) slotDropInfor = pickStorage.GetSlotIndexInfor(pickSlot.slotIndex);
+
+            pickStorage.TrashSlotItem(pickSlot.slotIndex);
+            dropStorage.AddItemIntoSlot(slotIndex, slotDropInfor.Item1, slotDropInfor.Item2);
+        }
+        else
+        {
+            Storage pickStorage = StorageCodeMap.GetComponentByCode(pickSlot.storageCode);
+
+            (ItemSO, int) slotPickInfor = dropStorage.GetSlotIndexInfor(slotIndex);
+            (ItemSO, int) slotDropInfor = pickStorage.GetSlotIndexInfor(pickSlot.slotIndex);
+
+            pickStorage.TrashSlotItem(pickSlot.slotIndex);
+            pickStorage.AddItemIntoSlot(pickSlot.slotIndex, slotPickInfor.Item1, slotPickInfor.Item2);
+
+            dropStorage.TrashSlotItem(slotIndex);
+            dropStorage.AddItemIntoSlot(slotIndex, slotDropInfor.Item1, slotDropInfor.Item2);
+        }
     }
 }

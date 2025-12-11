@@ -7,6 +7,9 @@ public class PropSO : CraftableSO
     [Header("Tutorial Info")]
     public List<TutorialStep> tutorialSteps;
 
+    [Header("Sub Interact")]
+    public List<TutorialStep> subInteractSteps;
+
     private GameObject itemModel;
 
     public override void SpawnItem()

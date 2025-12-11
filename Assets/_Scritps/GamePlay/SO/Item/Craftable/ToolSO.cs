@@ -35,7 +35,8 @@ public class ToolSO : CraftableSO
 
     public override void DespawnItem()
     {
-        itemModel.GetComponent<IEquipment>().Despawn();
+        if (itemModel)
+            itemModel.GetComponent<IEquipment>().Despawn();
     }
 
     public override void TakeOut()

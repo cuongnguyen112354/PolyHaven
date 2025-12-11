@@ -4,20 +4,20 @@ using UnityEngine.UI;
 
 public class ItemTutorial : MonoBehaviour
 {
-    [SerializeField] private TMP_Text descriptionText1;
-    [SerializeField] private Image interaction1;
+    [SerializeField] private TMP_Text descriptionText;
+    [SerializeField] private Image interaction;
 
     public void UpdateTutorialUI(TutorialStep step)
     {
         if (step != null)
         {
-            descriptionText1.text = step.description;
-            interaction1.sprite = step.interaction;
+            descriptionText.text = step.description;
+            interaction.sprite = step.interaction;
         }
         else
         {
-            descriptionText1.text = "";
-            interaction1 = null;
+            descriptionText.text = "";
+            interaction = null;
         }
     }
 }
