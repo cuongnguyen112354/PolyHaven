@@ -27,12 +27,16 @@ public class Chest : Storage, IInteractable
 
         isOpen = true;
         animator.SetBool("isOpen", isOpen);
+
+        AudioManager.Instance.PlayAudioClip("chest-open");
     }
 
     private void CloseChest()
     {
         isOpen = false;
         animator.SetBool("isOpen", isOpen);
+
+        AudioManager.Instance.PlayAudioClip("chest-close");   
     }
 
     private void FillItemIntoUI()
@@ -71,11 +75,6 @@ public class Chest : Storage, IInteractable
         else
             OpenChest();
     }
-
-    // public Dictionary<string, List<int>> GetDicName()
-    // {
-    //     return DicName;
-    // }
 
     public void InitChestUI()
     {

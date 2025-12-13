@@ -31,3 +31,7 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 0fe06b92b2e3233488655075954ce2d3, type: 3}
   - key: rock-destroy
     audioClip: {fileID: 8300000, guid: e128e7eec1dca244396a08280dfa1ae5, type: 3}
+  - key: chest-open
+    audioClip: {fileID: 8300000, guid: a31eb9856e674c94fa016c2a7c09adde, type: 3}
+  - key: chest-close
+    audioClip: {fileID: 8300000, guid: bf2b0edf1723e9247aeb54c535ff0826, type: 3}
