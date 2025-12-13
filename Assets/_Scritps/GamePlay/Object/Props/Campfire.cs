@@ -2,7 +2,15 @@ using UnityEngine;
 
 public class Campfire : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    private void OnDestroy()
+    {
+        if (PlayerHealth.Instance.isResting)
+        {
+            PlayerHealth.Instance.isResting = false;
+        }            
+    }
+
+    private void OnTriggerStay(Collider other)
     {
         other.TryGetComponent<PlayerHealth>(out PlayerHealth playerHealth);
 
