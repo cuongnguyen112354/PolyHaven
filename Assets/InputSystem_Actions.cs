@@ -276,6 +276,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Slot7"",
+                    ""type"": ""Button"",
+                    ""id"": ""6dc4b344-3bc1-475d-8e06-8f48f0c9ea18"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Crafting"",
                     ""type"": ""Button"",
                     ""id"": ""c03e3d72-a658-4631-9155-e4c14f92df09"",
@@ -770,6 +779,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""638bc541-d053-46cc-ab03-8b9f99596f0b"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Slot7"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""6152334d-dd3c-4a4f-85fa-9b9714a8d701"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
@@ -905,6 +925,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_UI_Slot4 = m_UI.FindAction("Slot4", throwIfNotFound: true);
         m_UI_Slot5 = m_UI.FindAction("Slot5", throwIfNotFound: true);
         m_UI_Slot6 = m_UI.FindAction("Slot6", throwIfNotFound: true);
+        m_UI_Slot7 = m_UI.FindAction("Slot7", throwIfNotFound: true);
         m_UI_Crafting = m_UI.FindAction("Crafting", throwIfNotFound: true);
         m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
         // Equipment
@@ -1114,6 +1135,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Slot4;
     private readonly InputAction m_UI_Slot5;
     private readonly InputAction m_UI_Slot6;
+    private readonly InputAction m_UI_Slot7;
     private readonly InputAction m_UI_Crafting;
     private readonly InputAction m_UI_Escape;
     /// <summary>
@@ -1187,6 +1209,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "UI/Slot6".
         /// </summary>
         public InputAction @Slot6 => m_Wrapper.m_UI_Slot6;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/Slot7".
+        /// </summary>
+        public InputAction @Slot7 => m_Wrapper.m_UI_Slot7;
         /// <summary>
         /// Provides access to the underlying input action "UI/Crafting".
         /// </summary>
@@ -1266,6 +1292,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Slot6.started += instance.OnSlot6;
             @Slot6.performed += instance.OnSlot6;
             @Slot6.canceled += instance.OnSlot6;
+            @Slot7.started += instance.OnSlot7;
+            @Slot7.performed += instance.OnSlot7;
+            @Slot7.canceled += instance.OnSlot7;
             @Crafting.started += instance.OnCrafting;
             @Crafting.performed += instance.OnCrafting;
             @Crafting.canceled += instance.OnCrafting;
@@ -1328,6 +1357,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Slot6.started -= instance.OnSlot6;
             @Slot6.performed -= instance.OnSlot6;
             @Slot6.canceled -= instance.OnSlot6;
+            @Slot7.started -= instance.OnSlot7;
+            @Slot7.performed -= instance.OnSlot7;
+            @Slot7.canceled -= instance.OnSlot7;
             @Crafting.started -= instance.OnCrafting;
             @Crafting.performed -= instance.OnCrafting;
             @Crafting.canceled -= instance.OnCrafting;
@@ -1662,6 +1694,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSlot6(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Slot7" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSlot7(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Crafting" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

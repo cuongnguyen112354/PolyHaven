@@ -190,6 +190,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Slot7",
+                    "type": "Button",
+                    "id": "6dc4b344-3bc1-475d-8e06-8f48f0c9ea18",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Crafting",
                     "type": "Button",
                     "id": "c03e3d72-a658-4631-9155-e4c14f92df09",
@@ -679,6 +688,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Slot6",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "638bc541-d053-46cc-ab03-8b9f99596f0b",
+                    "path": "<Keyboard>/7",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Slot7",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -29,16 +29,18 @@ public class PlayerController : MonoBehaviour
         inputActions.UI.Slot4.performed += ctx => hotBar.SelectingSlot(3);
         inputActions.UI.Slot5.performed += ctx => hotBar.SelectingSlot(4);
         inputActions.UI.Slot6.performed += ctx => hotBar.SelectingSlot(5);
+        inputActions.UI.Slot7.performed += ctx => hotBar.SelectingSlot(6);
     }
 
     void OnDisable()
     {
-        inputActions.UI.Slot1.performed += ctx => hotBar.SelectingSlot(0);
-        inputActions.UI.Slot2.performed += ctx => hotBar.SelectingSlot(1);
-        inputActions.UI.Slot3.performed += ctx => hotBar.SelectingSlot(2);
-        inputActions.UI.Slot4.performed += ctx => hotBar.SelectingSlot(3);
-        inputActions.UI.Slot5.performed += ctx => hotBar.SelectingSlot(4);
-        inputActions.UI.Slot6.performed += ctx => hotBar.SelectingSlot(5);
+        inputActions.UI.Slot1.performed -= ctx => hotBar.SelectingSlot(0);
+        inputActions.UI.Slot2.performed -= ctx => hotBar.SelectingSlot(1);
+        inputActions.UI.Slot3.performed -= ctx => hotBar.SelectingSlot(2);
+        inputActions.UI.Slot4.performed -= ctx => hotBar.SelectingSlot(3);
+        inputActions.UI.Slot5.performed -= ctx => hotBar.SelectingSlot(4);
+        inputActions.UI.Slot6.performed -= ctx => hotBar.SelectingSlot(5);
+        inputActions.UI.Slot7.performed -= ctx => hotBar.SelectingSlot(6);
 
         inputActions.Disable();
     }
