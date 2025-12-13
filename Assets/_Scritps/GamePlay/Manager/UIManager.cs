@@ -6,7 +6,7 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
-    [SerializeField] private PickupNotify pickupNotify;
+    [SerializeField] private ReceivedNotify receivedNotify;
 
     // [SerializeField] private UIAction[] uiActions;
 
@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowPickupNotify(int quantity, string itemName)
     {
-        pickupNotify.ShowPickupNotification(quantity, itemName);
+        receivedNotify.ShowRecievedNotification(quantity, itemName);
     }
 
     // void OnEnable()

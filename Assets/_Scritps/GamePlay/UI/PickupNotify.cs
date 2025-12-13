@@ -1,22 +1,21 @@
 using TMPro;
 using UnityEngine;
 
-public class PickupNotify : MonoBehaviour
+public class ReceivedNotify : MonoBehaviour
 {
-    [SerializeField] private TMP_Text pickupText;
-    [SerializeField] private Animator pickupAnim;
+    [SerializeField] private TMP_Text receivedText;
+    [SerializeField] private Animator receivedAnim;
 
     private void DoneFloatingEvent()
     {
         gameObject.SetActive(false);
     }
 
-    public void ShowPickupNotification(int quantity, string itemName)
+    public void ShowRecievedNotification(int quantity, string itemName)
     {
         gameObject.SetActive(true);
 
-        pickupText.text = $"+{quantity} {itemName}";
-        pickupAnim.Play("Floating", 0, 0f);
-
+        receivedText.text = $"+{quantity} {itemName}";
+        receivedAnim.Play("Floating", 0, 0f);
     }
 }

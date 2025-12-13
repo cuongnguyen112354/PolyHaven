@@ -31,7 +31,7 @@ public class Storage : MonoBehaviour
         inventorySlots[slotIndex].UpdateQuantityUI(DicSlot[slotIndex].quantity);
     }
 
-    protected void RemoveSlotItem(int slotIndex)
+    public void RemoveSlotItem(int slotIndex)
     {
         TrashSlotItem(slotIndex);
         inventorySlots[slotIndex].RemoveItem();
@@ -170,15 +170,34 @@ public class Storage : MonoBehaviour
 
     public virtual void AddItemIntoSlot(int slotIndex, ItemSO itemData, int quantity)
     {
-        if (!DicName.ContainsKey(itemData.itemName))
-            DicName[itemData.itemName] = new List<int> { slotIndex };
-        else
-            DicName[itemData.itemName].Add(slotIndex);
-        
-        Slot slot = new (itemData, quantity);
-        DicSlot.Add(slotIndex, slot);
+        // Trường hợp Add
+        if (!DicSlot.ContainsKey(slotIndex))
+        {
+            if (!DicName.ContainsKey(itemData.itemName))
+                DicName[itemData.itemName] = new List<int> { slotIndex };
+            else
+                DicName[itemData.itemName].Add(slotIndex);
+            
+            Slot slot = new (itemData, quantity);
+            DicSlot.Add(slotIndex, slot);
 
-        inventorySlots[slotIndex].UpdateUI(quantity);
+            inventorySlots[slotIndex].UpdateUI(quantity);
+        }
+        // Trường hợp Merge
+        else
+        {
+            int qty = quantity;
+
+            Slot slot = DicSlot[slotIndex];
+            int toAdd = Mathf.Min(slot.SpaceLeft, quantity);
+            slot.quantity += toAdd;
+            quantity -= toAdd;
+
+            inventorySlots[slotIndex].UpdateQuantityUI(DicSlot[slotIndex].quantity);
+
+            if (quantity > 0)
+                IsAddItem(itemData, quantity);
+        }
     }
 
     public (bool, int) HasItem(Ingredient ingredient)

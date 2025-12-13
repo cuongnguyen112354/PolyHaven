@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Chest
   description: 
-  icon: {fileID: 21300000, guid: 2023386782ad34a4ebdf1c7dc65e3b7a, type: 3}
+  icon: {fileID: 21300000, guid: b5a2a85a8b7437b47b88064d69d237e3, type: 3}
   maxStackSize: 1
   targetIcon: {fileID: 21300000, guid: a405f336bf0475e468cc0d1df4dcdfab, type: 3}
   typeTextTutorial: 1

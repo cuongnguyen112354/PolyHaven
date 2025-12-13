@@ -65,33 +65,33 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 
         draggableItem.parentAfterDrag = transform;
 
-        Storage dropStorage = StorageCodeMap.GetComponentByCode(storageCode);
-        // Trường hợp cùng một Storage
-        if (storageCode == pickSlot.storageCode)
+        if (!basic)
         {
-            dropStorage.SwapSlotItem(pickSlot.slotIndex, slotIndex, basic);
-        }
-        // Trường hợp khác Storage
-        else if (basic)
-        {
-            Storage pickStorage = StorageCodeMap.GetComponentByCode(pickSlot.storageCode);
-            (ItemSO, int) slotDropInfor = pickStorage.GetSlotIndexInfor(pickSlot.slotIndex);
+            bool isMerge = false;
 
-            pickStorage.TrashSlotItem(pickSlot.slotIndex);
-            dropStorage.AddItemIntoSlot(slotIndex, slotDropInfor.Item1, slotDropInfor.Item2);
+            Storage pickStorage = StorageCodeMap.GetComponentByCode(pickSlot.storageCode);
+            Storage dropStorage = StorageCodeMap.GetComponentByCode(storageCode);
+
+            (ItemSO, int) slotPickInfor = pickStorage.GetSlotIndexInfor(pickSlot.slotIndex);
+            (ItemSO, int) slotDropInfor = dropStorage.GetSlotIndexInfor(slotIndex);
+
+            if (slotPickInfor.Item1.itemName == slotDropInfor.Item1.itemName)
+                isMerge = true;
+
+            if (storageCode == pickSlot.storageCode)
+            {             
+                if (isMerge)
+                    StorageHandle.Instance.MergeSlotItemSameStorage(storageCode, pickSlot.slotIndex, slotIndex);
+                else
+                    StorageHandle.Instance.SwapSlotItemSameStorage(storageCode, pickSlot.slotIndex, slotIndex, basic);
+            }
+            else
+                if (isMerge)
+                    StorageHandle.Instance.MergeSlotItemDifferentStorage(pickSlot.storageCode, storageCode, pickSlot.slotIndex, slotIndex);
+                else
+                    StorageHandle.Instance.SwapSlotItemDifferentStorageNoneBasic(pickSlot.storageCode, storageCode, pickSlot.slotIndex, slotIndex);
         }
         else
-        {
-            Storage pickStorage = StorageCodeMap.GetComponentByCode(pickSlot.storageCode);
-
-            (ItemSO, int) slotPickInfor = dropStorage.GetSlotIndexInfor(slotIndex);
-            (ItemSO, int) slotDropInfor = pickStorage.GetSlotIndexInfor(pickSlot.slotIndex);
-
-            pickStorage.TrashSlotItem(pickSlot.slotIndex);
-            pickStorage.AddItemIntoSlot(pickSlot.slotIndex, slotPickInfor.Item1, slotPickInfor.Item2);
-
-            dropStorage.TrashSlotItem(slotIndex);
-            dropStorage.AddItemIntoSlot(slotIndex, slotDropInfor.Item1, slotDropInfor.Item2);
-        }
+            StorageHandle.Instance.SwapSlotItemDifferentStorageBasic(pickSlot.storageCode, storageCode, pickSlot.slotIndex, slotIndex);
     }
 }
