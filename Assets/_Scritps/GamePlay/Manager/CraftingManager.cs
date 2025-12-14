@@ -107,6 +107,7 @@ public class CraftingManager : MonoBehaviour
 
     public void ResetUI()
     {
+        recipeSelecting = null;
         iconItemResult.sprite = defaultIcon;
 
         foreach (GameObject ingredient in ingredientGOs)
@@ -126,7 +127,30 @@ public class CraftingManager : MonoBehaviour
     {
         if (Inventory.Instance.IsAddItem(recipeSelecting.result))
         {
-            Inventory.Instance.RemoveItems(recipeSelecting.result.ingredients);
+            foreach (Ingredient ingredient in recipeSelecting.result.ingredients)
+            {
+                int qtyNotYetDeducted = ingredient.quantity;
+                int qtyInInven = Inventory.Instance.GetQuantityItem(ingredient.item.itemName);
+                
+                if (qtyInInven > 0)
+                {
+                    if (qtyInInven >= qtyNotYetDeducted)
+                    {
+                        Inventory.Instance.RemoveItem(ingredient.item.itemName, qtyNotYetDeducted);
+                        continue;
+                    }
+                    else
+                    {
+                        Inventory.Instance.RemoveItem(ingredient.item.itemName, qtyInInven);
+
+                        qtyNotYetDeducted -= qtyInInven;
+                        HotBar.Instance.RemoveItem(ingredient.item.itemName, qtyNotYetDeducted);
+                    }
+                }
+                else
+                    HotBar.Instance.RemoveItem(ingredient.item.itemName, qtyNotYetDeducted);
+            }
+
             ResetUI();
         }
     }

@@ -4,57 +4,33 @@ using UnityEngine.UI;
 
 public class IngredientUI : MonoBehaviour
 {
-    [SerializeField] private CanvasGroup canvasGroup;
-
     [SerializeField] private Image iconItem;
-
     [SerializeField] private TMP_Text quanlity;
+
     [SerializeField] private Color enoughColor;
     [SerializeField] private Color noneEnoughColor;
 
-    // private Ingredient ingredient = null;
-
     public bool Init(Ingredient ingredient)
     {
-        // this.ingredient = ingredient;
-
         iconItem.sprite = ingredient.item.icon;
 
-        (bool result, int missingQuantity) = Inventory.Instance.HasItem(ingredient);
-        if (result)
-        {
-            canvasGroup.alpha = 1;
-            quanlity.color = enoughColor;
-            quanlity.text = ingredient.quantity.ToString();
+        int qtyInInven = Inventory.Instance.GetQuantityItem(ingredient.item.itemName);
+        int qtyInHotBar = HotBar.Instance.GetQuantityItem(ingredient.item.itemName);
 
-            return true;
-        }
+        if (qtyInInven + qtyInHotBar >= ingredient.quantity)
+            return UpdateIngredientUI(ingredient, true, qtyInInven + qtyInHotBar);
         else
-        {
-            canvasGroup.alpha = .6f;
-            quanlity.color = noneEnoughColor;
-            quanlity.text = $"{missingQuantity}/{ingredient.quantity}";
-
-            return false;
-        }
+            return UpdateIngredientUI(ingredient, false, qtyInInven + qtyInHotBar);
     }
 
-    // private void OnEnable()
-    // {
-    //     iconItem.sprite = ingredient.item.icon;
-
-    //     (bool result, int missingQuantity) = InventoryManager.Instance.HasItem(ingredient);
-    //     if (result)
-    //     {
-    //         canvasGroup.alpha = 1;
-    //         quanlity.color = enoughColor;
-    //         quanlity.text = ingredient.quantity.ToString();
-    //     }
-    //     else
-    //     {
-    //         canvasGroup.alpha = .6f;
-    //         quanlity.color = noneEnoughColor;
-    //         quanlity.text = $"{missingQuantity}/{ingredient.quantity}";
-    //     }
-    // }
+    public bool UpdateIngredientUI(Ingredient ingredient, bool result, int missingQuantity)
+    {
+        if (result)
+            quanlity.color = enoughColor;
+        else
+            quanlity.color = noneEnoughColor;
+        
+        quanlity.text = $"{missingQuantity}/{ingredient.quantity}";
+        return result;
+    }
 }

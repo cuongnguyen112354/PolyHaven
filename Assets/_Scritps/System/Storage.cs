@@ -200,18 +200,12 @@ public class Storage : MonoBehaviour
         }
     }
 
-    public (bool, int) HasItem(Ingredient ingredient)
+    public int GetQuantityItem(string itemName)
     {
-        if (DicName.TryGetValue(ingredient.item.itemName, out List<int> slots))
-        {
-            int quantity = ScanSlotsToGetQuantity(slots);
-            if (quantity < ingredient.quantity)
-                return (false, quantity);
-            else
-                return (true, 0);
-        }
+        if (DicName.TryGetValue(itemName, out List<int> slots))
+            return ScanSlotsToGetQuantity(slots);
 
-        return (false, 0);
+        return 0;
     }
 
     public void RemoveItem(string itemName, int quantity = 1)
@@ -220,14 +214,14 @@ public class Storage : MonoBehaviour
             RemoveItemFromSlots(slotIndexs, quantity);
     }
 
-    public void RemoveItems(List<Ingredient> ingredients)
-    {
-        foreach (Ingredient ingredient in ingredients)
-        {
-            if (DicName.TryGetValue(ingredient.item.itemName, out List<int> slotIndexs))
-                RemoveItemFromSlots(slotIndexs, ingredient.quantity);
-        }
-    }
+    // public void RemoveItems(List<Ingredient> ingredients)
+    // {
+    //     foreach (Ingredient ingredient in ingredients)
+    //     {
+    //         if (DicName.TryGetValue(ingredient.item.itemName, out List<int> slotIndexs))
+    //             RemoveItemFromSlots(slotIndexs, ingredient.quantity);
+    //     }
+    // }
 
     public virtual void SwapSlotItem(int firstSlot, int lastSlot, bool basic)
     {
