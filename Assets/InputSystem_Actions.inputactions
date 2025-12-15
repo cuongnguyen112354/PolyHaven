@@ -16,7 +16,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Retrive",
+                    "name": "Destroy",
                     "type": "Button",
                     "id": "c7358890-50f0-49d9-afa7-e3362543e6fe",
                     "expectedControlType": "",
@@ -44,7 +44,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Retrive",
+                    "action": "Destroy",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

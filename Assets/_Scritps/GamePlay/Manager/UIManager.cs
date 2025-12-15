@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
+using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(InputSystem_Actions))]
 public class UIManager : MonoBehaviour
@@ -13,6 +16,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject chestPanel;
     [SerializeField] private GameObject craftingPanel;
 
+    [SerializeField] private GameObject confirmPopup;
+    [SerializeField] private TMP_Text confirmContent;
+    [SerializeField] private Button confirmBtn;
+    private Func<UniTaskVoid> onConfirm;
+
     [SerializeField] private GameObject darkBg;
     [SerializeField] private Animator fadeAnimator;
 
@@ -24,6 +32,11 @@ public class UIManager : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
+    }
+
+    void Start()
+    {
+        confirmBtn.onClick.AddListener(OnConfirm);
     }
 
     IEnumerator FadeIn()
@@ -54,6 +67,12 @@ public class UIManager : MonoBehaviour
         callback?.Invoke();
     }
 
+    private void OnConfirm()
+    {
+        onConfirm?.Invoke().Forget();
+        onConfirm = null;
+    }
+
     public void OnFadeIn()
     {
         StartCoroutine(FadeIn());
@@ -82,6 +101,9 @@ public class UIManager : MonoBehaviour
 
         if (craftingPanel.activeSelf)
             craftingPanel.SetActive(false);
+
+        if (confirmPopup.activeSelf)
+            confirmPopup.SetActive(false);
 
         if (!fadeAnimator.gameObject.activeSelf)
             fadeAnimator.gameObject.SetActive(true);        
@@ -129,5 +151,14 @@ public class UIManager : MonoBehaviour
     public void ShowPickupNotify(int quantity, string itemName)
     {
         receivedNotify.ShowRecievedNotification(quantity, itemName);
+    }
+
+    public void ShowConfirmPopup(string content, Func<UniTaskVoid> action)
+    {
+        confirmContent.text = content;
+        onConfirm = action;
+
+        confirmPopup.SetActive(true);
+        GameManager.Instance.SetGameState(GameManager.GameState.UI);
     }
 }

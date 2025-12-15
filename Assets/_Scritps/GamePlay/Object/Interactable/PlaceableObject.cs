@@ -96,23 +96,14 @@ public class PlaceableObject : MonoBehaviour
 
     void PlaceBlock()
     {
-        // meshRenderer.enabled = true;
-        // meshRenderer.material = sourceMat;
-        // GetComponent<MeshCollider>().isTrigger = false;
-        // GetComponent<MeshCollider>().convex = false;
-        // gameObject.layer = LayerMask.NameToLayer("Default");
-
-        // foreach (GameObject go in gameObjects)
-        //     go.SetActive(true);
-
-        // foreach (MonoBehaviour script in scripts)
-        //     script.enabled = true;
-
         HotBar.Instance.RemoveItem(gameObject.name);
         GameObject obj = ConstructionManager.Instance.AddPlacedObject(gameObject.name, transform.position, transform.rotation);
         
-        if (obj.name == "Chest")
-            obj.GetComponent<Chest>().storageCode = ChestManager.Instance.GenerateChestCode();
+        if (obj.TryGetComponent<Chest>(out var chest))
+        {
+            chest.storageCode = ChestManager.Instance.GenerateChestCode();
+            StorageCodeMap.AddCode(chest.storageCode, chest);
+        }
 
         Destroy(gameObject);
     }

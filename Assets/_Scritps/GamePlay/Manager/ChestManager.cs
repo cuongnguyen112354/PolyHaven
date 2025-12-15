@@ -22,17 +22,6 @@ public class ChestManager : MonoBehaviour
 
 
     #region [[ --- Inventory Data --- ]]
-    // private void AddItemToSlot(int slotIndex, ItemSO item, int quantity)
-    // {
-    //     if (DicName.TryGetValue(item.itemName, out List<int> indices))
-    //         indices.Add(slotIndex);
-    //     else
-    //         DicName[item.itemName] = new List<int> { slotIndex };
-
-    //     DicSlot[slotIndex] = new Slot(item, quantity);
-    //     inventorySlots[slotIndex].AddItem(item, quantity);
-    // }
-
     public void Init(List<ChestData> chestsData)
     {
         foreach (ChestData chestData in chestsData)

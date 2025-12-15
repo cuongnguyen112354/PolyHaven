@@ -1,5 +1,3 @@
-// using System.Collections.Generic;
-// using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using JoaoMilone.Pooler.Controller;
 using UnityEngine;
@@ -8,12 +6,11 @@ public class DestroyableObject : MonoBehaviour, ISubInteractable
 {
     [SerializeField] private PropSO itemData;
 
-    public void HowInteract()
-    {
-        TutorialManager.Instance.ShowTutorial(itemData.subInteractSteps);
-    }
+    [SerializeField] private string destroyDescription =
+        "- Are you sure you want to dismantle this chest?\n" +
+        "- 50% of the materials will be refunded.";
 
-    public async UniTask Destroy()
+    private async UniTaskVoid ConfirmDestroy()
     {
         gameObject.SetActive(false);
 
@@ -31,31 +28,22 @@ public class DestroyableObject : MonoBehaviour, ISubInteractable
             AudioManager.Instance.PlayAudioClip("pick_up");
         }
 
-        // if (gameObject.name == "Chest")
-        // {
-        //     SpwandItems().Forget();
-        // }
-        // else
-        // {
-            ConstructionManager.Instance.RemovePlacedObject(itemData.itemName, gameObject);            
-            // Destroy(gameObject);
-        // }
+        ConstructionManager.Instance.RemovePlacedObject(itemData.itemName, gameObject);
+
+        if (gameObject.TryGetComponent<Chest>(out var chest))
+            StorageCodeMap.codeMap.Remove(chest.storageCode);
+        
+        await UniTask.WaitForEndOfFrame();
+        TutorialManager.Instance.HideAllTutorials();
     }
 
-    // public UniTaskVoid SpwandItems()
-    // {
-    //     Chest chestCpnt = gameObject.GetComponent<Chest>();
-    //     Dictionary<string, List<int>> DicName = chestCpnt.GetDicName();
+    public void HowInteract()
+    {
+        TutorialManager.Instance.ShowTutorial(itemData.subInteractSteps);
+    }
 
-    //     foreach (string key in DicName.Keys)
-    //     {
-    //         chestCpnt.ScanSlotsToGetQuantity(DicName[key]);
-
-    //     }
-
-    //     ConstructionManager.Instance.RemovePlacedObject(itemData.itemName, gameObject);
-
-    //     AudioManager.Instance.PlayAudioClip("pick_up");
-    //     Destroy(gameObject);
-    // }
+    public void DestroyRequest()
+    {
+        UIManager.Instance.ShowConfirmPopup(destroyDescription, ConfirmDestroy);
+    }
 }

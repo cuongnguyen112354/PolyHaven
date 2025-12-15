@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Cysharp.Threading.Tasks;
 
 public class InteractObject : MonoBehaviour
 {
@@ -28,13 +27,13 @@ public class InteractObject : MonoBehaviour
         inputActions.Enable();
 
         inputActions.Player.MainInteract.performed += _ => MainInteract();
-        inputActions.Player.Retrive.performed += _ => Retrive().Forget();
+        inputActions.Player.Destroy.performed += _ => DestroyRequest();
     }
 
     void OnDisable()
     {
         inputActions.Player.MainInteract.performed -= _ => MainInteract();
-        inputActions.Player.Retrive.performed -= _ => Retrive().Forget();
+        inputActions.Player.Destroy.performed -= _ => DestroyRequest();
 
         inputActions.Disable();
     }
@@ -90,26 +89,12 @@ public class InteractObject : MonoBehaviour
         else if (focusingObject.TryGetComponent<Chest>(out var chest))
             chest.Affected();
     }
-
-    // private void Retrive()
-    // {
-    //     if (focusingObject == null || !GameManager.Instance.CompareGameState("Playing")) return;
-
-    //     if (focusingObject.TryGetComponent<RetrievableObject>(out var prop))
-    //         prop.Interact();
-    // }
-
-    private async UniTaskVoid Retrive()
+    private void DestroyRequest()
     {
         if (focusingObject == null || !GameManager.Instance.CompareGameState("Playing")) return;
 
         if (focusingObject.TryGetComponent<DestroyableObject>(out var prop))
-        {
-            prop.Destroy().Forget();
-            
-            await UniTask.WaitForEndOfFrame();
-            TutorialManager.Instance.HideAllTutorials();
-        }
+            prop.DestroyRequest();
     }
 
 

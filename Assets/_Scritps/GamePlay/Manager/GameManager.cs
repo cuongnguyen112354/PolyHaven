@@ -18,22 +18,11 @@ public class GameManager : MonoBehaviour
     }
     [SerializeField] private GameState CurrentGameState;
 
-    // [SerializeField] GameObject pauseMenu;
-
-    // [SerializeField] GameObject darkBg;
-    // [SerializeField] GameObject inventoryPanel;
-    // [SerializeField] GameObject chestPanel;
-    // [SerializeField] GameObject selectionPanel;
-
-    // [SerializeField] Animator fadeAnimator;
-
     [SerializeField] TMP_Text actualyFPSText;
 
     private int frameCount = 0;
     private float elapsedTime = 0f;
     private readonly float refreshTime = .5f; // Cập nhật mỗi 1 giây
-
-    // private WaitForSeconds _waitForSeconds1 = new (1);
 
     private InputSystem_Actions inputActions;
 

@@ -102,7 +102,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Retrive"",
+                    ""name"": ""Destroy"",
                     ""type"": ""Button"",
                     ""id"": ""c7358890-50f0-49d9-afa7-e3362543e6fe"",
                     ""expectedControlType"": """",
@@ -130,7 +130,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Retrive"",
+                    ""action"": ""Destroy"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -907,7 +907,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_MainInteract = m_Player.FindAction("MainInteract", throwIfNotFound: true);
-        m_Player_Retrive = m_Player.FindAction("Retrive", throwIfNotFound: true);
+        m_Player_Destroy = m_Player.FindAction("Destroy", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1014,7 +1014,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_MainInteract;
-    private readonly InputAction m_Player_Retrive;
+    private readonly InputAction m_Player_Destroy;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1031,9 +1031,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @MainInteract => m_Wrapper.m_Player_MainInteract;
         /// <summary>
-        /// Provides access to the underlying input action "Player/Retrive".
+        /// Provides access to the underlying input action "Player/Destroy".
         /// </summary>
-        public InputAction @Retrive => m_Wrapper.m_Player_Retrive;
+        public InputAction @Destroy => m_Wrapper.m_Player_Destroy;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1063,9 +1063,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @MainInteract.started += instance.OnMainInteract;
             @MainInteract.performed += instance.OnMainInteract;
             @MainInteract.canceled += instance.OnMainInteract;
-            @Retrive.started += instance.OnRetrive;
-            @Retrive.performed += instance.OnRetrive;
-            @Retrive.canceled += instance.OnRetrive;
+            @Destroy.started += instance.OnDestroy;
+            @Destroy.performed += instance.OnDestroy;
+            @Destroy.canceled += instance.OnDestroy;
         }
 
         /// <summary>
@@ -1080,9 +1080,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @MainInteract.started -= instance.OnMainInteract;
             @MainInteract.performed -= instance.OnMainInteract;
             @MainInteract.canceled -= instance.OnMainInteract;
-            @Retrive.started -= instance.OnRetrive;
-            @Retrive.performed -= instance.OnRetrive;
-            @Retrive.canceled -= instance.OnRetrive;
+            @Destroy.started -= instance.OnDestroy;
+            @Destroy.performed -= instance.OnDestroy;
+            @Destroy.canceled -= instance.OnDestroy;
         }
 
         /// <summary>
@@ -1575,12 +1575,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMainInteract(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Retrive" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Destroy" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnRetrive(InputAction.CallbackContext context);
+        void OnDestroy(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
