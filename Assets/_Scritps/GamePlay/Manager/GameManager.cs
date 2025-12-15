@@ -16,16 +16,16 @@ public class GameManager : MonoBehaviour
         UI,
         Paused
     }
-    GameState CurrentGameState;
+    [SerializeField] private GameState CurrentGameState;
 
-    [SerializeField] GameObject pauseMenu;
+    // [SerializeField] GameObject pauseMenu;
 
-    [SerializeField] GameObject darkBg;
-    [SerializeField] GameObject inventoryPanel;
-    [SerializeField] GameObject chestPanel;
-    [SerializeField] GameObject selectionPanel;
+    // [SerializeField] GameObject darkBg;
+    // [SerializeField] GameObject inventoryPanel;
+    // [SerializeField] GameObject chestPanel;
+    // [SerializeField] GameObject selectionPanel;
 
-    [SerializeField] Animator fadeAnimator;
+    // [SerializeField] Animator fadeAnimator;
 
     [SerializeField] TMP_Text actualyFPSText;
 
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     private float elapsedTime = 0f;
     private readonly float refreshTime = .5f; // Cập nhật mỗi 1 giây
 
-    private WaitForSeconds _waitForSeconds1 = new (1);
+    // private WaitForSeconds _waitForSeconds1 = new (1);
 
     private InputSystem_Actions inputActions;
 
@@ -48,8 +48,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         DataManager.Instance.InitData();
-
-        StartGame();
+        UIManager.Instance.OnStart();
     }
 
     void Update()
@@ -67,11 +66,6 @@ public class GameManager : MonoBehaviour
             // Reset đếm
             frameCount = 0;
             elapsedTime = 0f;
-        }
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            StorageCodeMap.LogAllCode();
         }
     }
 
@@ -95,6 +89,7 @@ public class GameManager : MonoBehaviour
         StorageCodeMap.codeMap.Clear();
     }
 
+    // Những hàm kích hoạt cho InputSystem
     private void OnInventory()
     {
         if (CompareGameState("Loading")) return;
@@ -125,6 +120,7 @@ public class GameManager : MonoBehaviour
             ResumeGame();
     }
 
+    // Những cái State
     void LoadingState()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -132,21 +128,9 @@ public class GameManager : MonoBehaviour
 
     void PlayingState()
     {
-        if (chestPanel.activeSelf)
-        {
-            Storage chest = StorageCodeMap.GetComponentByCode(ChestManager.Instance.currentChestCode);
-            if (chest is Chest chestObj)
-                chestObj.Affected();
-            chestPanel.SetActive(false);
-        }
-
-        darkBg.SetActive(false);
-        inventoryPanel.SetActive(false);
-        selectionPanel.SetActive(false);
-        pauseMenu.SetActive(false);
+        UIManager.Instance.OnPlaying();
 
         Cursor.lockState = CursorLockMode.Locked;
-
         Time.timeScale = 1f;
     }
 
@@ -157,51 +141,11 @@ public class GameManager : MonoBehaviour
 
     void PausedState()
     {
-        pauseMenu.SetActive(true);
+        UIManager.Instance.OnPause();
 
         Cursor.lockState = CursorLockMode.None;
 
         Time.timeScale = 0f;
-    }
-
-    IEnumerator FadeIn()
-    {
-        // fadeAnimator.SetFloat("speed", 1f);
-        fadeAnimator.Play("FadeIn", 0, 0f);
-
-        yield return _waitForSeconds1;
-
-        SetGameState(GameState.Playing);
-    }
-
-    IEnumerator FadeOut(Func<IEnumerator> callback = null)
-    {
-        fadeAnimator.Play("FadeOut", 0, 0f);
-        // fadeAnimator.SetFloat("speed", -1f);
-
-        yield return _waitForSeconds1;
-        if (callback != null)
-            StartCoroutine(callback());
-    }
-
-    IEnumerator FadeOut(Action callback = null)
-    {
-        fadeAnimator.Play("FadeOut", 0, 0f);
-        // fadeAnimator.SetFloat("speed", -1f);
-
-        yield return _waitForSeconds1;
-        callback?.Invoke();
-    }
-
-    private void ExitScene()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        GameController.Instance.MainMenuScene();
-    }
-
-    public void ResumeGame()
-    {
-        SetGameState(GameState.Playing);
     }
 
     public void SetGameState(GameState newState)
@@ -225,53 +169,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ActiveUI(string panelName)
-    {
-        if (panelName == "Inventory")
-            inventoryPanel.SetActive(true);
-        else if (panelName == "Chest")
-        {
-            chestPanel.SetActive(true);
-            inventoryPanel.SetActive(true);
-        }
-        else if (panelName == "Crafting")
-            selectionPanel.SetActive(true);
-
-        darkBg.SetActive(true);
-
-        SetGameState(GameState.UI);
-    }
-
-    public void StartGame()
-    {
-        if (pauseMenu.activeSelf)
-            pauseMenu.SetActive(false);
-
-        if (inventoryPanel.activeSelf)
-            inventoryPanel.SetActive(false);
-
-        if (chestPanel.activeSelf)
-            chestPanel.SetActive(false);
-
-        if (selectionPanel.activeSelf)
-            selectionPanel.SetActive(false);
-
-        if (!fadeAnimator.gameObject.activeSelf)
-            fadeAnimator.gameObject.SetActive(true);
-
-        SetGameState(GameState.Loading);
-        StartCoroutine(FadeIn());
-    }
-
     public bool CompareGameState(string state)
     {
         return CurrentGameState.ToString() == state;
     }
 
+    public void ActiveUI(string panelName)
+    {
+        UIManager.Instance.ActiveUI(panelName);
+
+        SetGameState(GameState.UI);
+    }
+
+    public void ResumeGame()
+    {
+        SetGameState(GameState.Playing);
+    }
+
     public void ReloadGamePaly()
     {
         SetGameState(GameState.Loading);
-        StartCoroutine(FadeOut(() => { return FadeIn(); }));
+        UIManager.Instance.OnFadeOutCoroutine();
         
         Time.timeScale = 1f; // Resume the game
     }
@@ -287,6 +205,12 @@ public class GameManager : MonoBehaviour
         DataPersistence.Instance.SaveGameData(gameData);
         DataPersistence.Instance.SetSettingsData(settingsData);
         
-        StartCoroutine(FadeOut(() => ExitScene()));
+        UIManager.Instance.OnFadeOutFunction();
+    }
+
+    public void ExitScene()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        GameController.Instance.MainMenuScene();
     }
 }   
